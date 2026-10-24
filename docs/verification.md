@@ -12,3 +12,11 @@
 
 - Browser interactions verified: stroke playback returns to replay; tracing starts; wrong answers keep completion disabled; a correct answer enables completion and advances to the next lesson; progress survives a reload on the journey page. Keyboard focus activates the same historical-form highlight as hover. No browser console errors were observed. Saved desktop and phone screenshots live in the ignored `outputs/` directory.
 - Fine-grained stroke-tracing accuracy and Mandarin speech output were not evaluated on physical touch/audio devices.
+
+## Four-screen reference update
+
+- Built on deployed version 2 (ae66a13), matching local/GitHub/Sites source at the start. Existing progress keys, stroke data, historical sources, API behavior and illustrations are retained.
+- 17 automated checks cover the prior 14 cases, plus Again preserving learned records, real journey/date-boundary calculations, and bundled Momo/Kai assets. TypeScript strict checking passes.
+- Browser layouts checked at 1440×900, 1280×720, 800×600, 390×844 and 360×640. Story/writing/practice panels fit at the latter four responsive sizes; all twelve stories fit at 360×640. Flashcards have no document or panel overflow at those sizes. Characters and Journey use natural vertical document flow, with no horizontal overflow on mobile.
+- Browser interactions checked: index lesson selection, playback, tracing start, wrong/correct practice answers and conditional completion, completion advance, × Again advance plus immediate revisit, ✓ Got it advance, ready-to-revisit jump, bookmarks, Saved filter, pinyin search, Momo offline suggestions and New chat. Progress, bookmarks and due state survived a reload.
+- Momo's phone input remains visible at 360×640. Settings opens on mobile without affecting saved data. Real Mandarin audio output, physical touch tracing accuracy, and a physical phone keyboard were not evaluated. Live Gemini remains unconfigured; provider checks use stubs.

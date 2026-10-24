@@ -5,7 +5,7 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {lessons,staticAnswer} from '../lib/lessons.ts';
-import {recordCompletion} from '../lib/progress.ts';
+import {recordCompletion,recordAgain,getJourneyStats} from '../lib/progress.ts';
 
 const testEnv={};globalThis.__INKTALES_TEST_ENV=testEnv;
 const apiBundle=await build({entryPoints:['app/api/assistant/route.ts'],bundle:true,platform:'node',format:'esm',write:false,plugins:[{name:'test-env',setup(b){b.onResolve({filter:/^cloudflare:workers$/},()=>({path:'test-env',namespace:'test'}));b.onLoad({filter:/.*/,namespace:'test'},()=>({contents:'export const env=globalThis.__INKTALES_TEST_ENV',loader:'js'}));}}]});
@@ -46,7 +46,7 @@ test('initial flashcard renders semantic content without a browser',async()=>{
  await build({entryPoints:['components/inktales.tsx'],bundle:true,platform:'node',format:'esm',outfile:out,external:['react','react-dom','lucide-react'],jsx:'automatic'});
  const {default:InkTales}=await import(pathToFileURL(out).href);
  const {renderToString}=await import('react-dom/server');const {createElement}=await import('react');
- const html=renderToString(createElement(InkTales));assert.match(html,/Flashcards/);assert.doesNotMatch(html,/Every character tells a story|Let it sink in|A little ink. A world of meaning.|rating-button|mnemonic-note/);assert.match(html,/flashcard-frame/);assert.match(html,/role="tablist"/);assert.match(html,/Character evolution/);assert.match(html,/Oracle bone/);assert.match(html,/Complete &amp; continue|Story/);assert.doesNotMatch(html,/dummy-key|GEMINI_API_KEY/);
+ const html=renderToString(createElement(InkTales));assert.match(html,/Flashcards/);assert.match(html,/Momo/);assert.match(html,/Choose flashcard/);assert.match(html,/Again — revisit this character/);assert.match(html,/Got it — remember and continue/);assert.doesNotMatch(html,/Previous character|Next character/);assert.doesNotMatch(html,/Every character tells a story|Let it sink in|A little ink. A world of meaning.|rating-button|mnemonic-note/);assert.match(html,/flashcard-frame/);assert.match(html,/role="tablist"/);assert.match(html,/Character evolution/);assert.match(html,/Oracle bone/);assert.match(html,/Complete &amp; continue|Story/);assert.doesNotMatch(html,/dummy-key|GEMINI_API_KEY/);
 });
 
 test('every character has its own focused illustration and descriptive alternative text',async()=>{
@@ -64,4 +64,20 @@ test('all twelve evolution records use sourced, licensed glyphs',async()=>{
  for(const l of lessons){const forms=sources[l.char];assert.equal(forms.length,3);assert.equal(new Set(forms.map(f=>f.stage)).size,3);assert.ok(forms.filter(f=>f.available).length>0,'No historical forms: '+l.char);
   for(const f of forms.filter(f=>f.available)){assert.match(f.source,/^https:\/\/commons\.wikimedia\.org\//);assert.match(f.license,/Public domain|CC0/);const bytes=await readFile('public'+f.file);assert.ok(bytes.length>100);if(f.file.endsWith('.svg'))assert.doesNotMatch(bytes.toString(),/<script|<foreignObject|(?:href|xlink:href)\s*=\s*["']https?:/i);}
  }
+});
+
+test('Again schedules a revisit and preserves learned status and other records',()=>{
+ const earlier={water:{learned:true,reviewedAt:100,due:200,rating:'Good'}};
+ const retry=recordAgain(earlier,'water',1000);assert.equal(retry.water.learned,true);assert.equal(retry.water.due,1000);assert.equal(retry.water.rating,'Again');assert.equal(earlier.water.due,200);
+ const first=recordAgain(earlier,'mountain',1000);assert.equal(first.mountain.learned,false);assert.deepEqual(first.water,earlier.water);
+ assert.equal(recordCompletion(first,'mountain',2000).mountain.learned,true);
+});
+test('journey summaries use saved dates, including retries, with local calendar boundaries',()=>{
+ const now=new Date(2026,9,24,12).getTime();
+ const earlier={water:{learned:true,reviewedAt:new Date(2026,9,24,0).getTime(),due:now+1,rating:'Completed'},mountain:{learned:false,reviewedAt:new Date(2026,9,23,23,59).getTime(),due:now-1,rating:'Again'},sun:{learned:true,reviewedAt:new Date(2026,9,17,23,59).getTime(),due:now-1,rating:'Good'}};
+ const stats=getJourneyStats(earlier,now);assert.equal(stats.learned,2);assert.deepEqual(stats.due,[{id:'mountain'},{id:'sun'}]);assert.equal(stats.week.length,7);assert.equal(stats.week[6].count,1);assert.equal(stats.week[5].count,1);assert.equal(stats.week.reduce((n,d)=>n+d.count,0),2);assert.equal(getJourneyStats({},now).week.every(d=>d.count===0),true);
+});
+test('Momo artwork and self-hosted Kai font with license are bundled',async()=>{
+ for(const p of ['assets/momo.webp','assets/inktales-kai.woff2','assets/inktales-kai-extended.woff2','assets/LXGW-WenKai-OFL.txt'])assert.ok((await readFile('public/'+p)).length>1000,p);
+ const font=await readFile('public/assets/inktales-kai.woff2');assert.equal(font.subarray(0,4).toString(),'wOF2');assert.ok(font.length<50000,'Initial character font should stay small');
 });
