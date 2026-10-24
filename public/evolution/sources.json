@@ -1,0 +1,386 @@
+{
+  "山": [
+    {
+      "stage": "oracle",
+      "label": "Oracle bone",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%B1%B1-oracle.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 山-oracle-Shang.svg ” vector image is depicting the character 山 (3-stroke traditional Kangxi radical 046 山 + 7 strokes, ancient Shuowen radical 350) in the Shang oracle script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/山-oracle.svg"
+    },
+    {
+      "stage": "bronze",
+      "label": "Bronze script",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%B1%B1-bronze.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 山-bronze-bronze.svg ” vector image is depicting the character 山 (3-stroke traditional Kangxi radical 046 山 + 7 strokes) in the bronze script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/山-bronze.svg"
+    },
+    {
+      "stage": "seal",
+      "label": "Small seal",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%B1%B1-seal.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 山-seal.svg ” vector image is depicting the character 山 (3-stroke traditional Kangxi radical 046 山 + 3 strokes, ancient Shuowen radical 350) in the Shuowen seal script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/山-seal.svg"
+    }
+  ],
+  "水": [
+    {
+      "stage": "oracle",
+      "label": "Oracle bone",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%B0%B4-oracle.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 水-oracle-shang.svg ” vector image is depicting the character 水 (4-stroke traditional Kangxi radical 085 水 + 5 strokes) in the Shang oracle script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/水-oracle.svg"
+    },
+    {
+      "stage": "bronze",
+      "label": "Bronze script",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%B0%B4-bronze.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 水-bronze-western.svg ” vector image is depicting the character 水 (4-stroke traditional Kangxi radical 085 水 + 5 strokes, ancient Shuowen radical 410) in the Western Zhou bronze script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/水-bronze.svg"
+    },
+    {
+      "stage": "seal",
+      "label": "Small seal",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%B0%B4-seal.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 水-seal.svg ” vector image is depicting the character 水 (4-stroke traditional Kangxi radical 085 水 + 5 strokes, ancient Shuowen radical 410) in the Shuowen seal script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/水-seal.svg"
+    }
+  ],
+  "日": [
+    {
+      "stage": "oracle",
+      "label": "Oracle bone",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%97%A5-oracle.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 日-oracle-shang.svg ” vector image is depicting the character 日 (4-stroke traditional Kangxi radical 072 日 + 5 strokes, ancient Shuowen radical 231) in the Shang oracle script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/日-oracle.svg"
+    },
+    {
+      "stage": "bronze",
+      "label": "Bronze script",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%97%A5-bronze.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 日-bronze-western.svg ” vector image is depicting the character 日 (4-stroke traditional Kangxi radical 072 日 + 2 strokes, ancient Shuowen radical 231) in the Western Zhou bronze script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/日-bronze.svg"
+    },
+    {
+      "stage": "seal",
+      "label": "Small seal",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%97%A5-seal.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 日-seal.svg ” vector image is depicting the character 日 (4-stroke traditional Kangxi radical 072 日 + 2 strokes, ancient Shuowen radical 231) in the Shuowen seal script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/日-seal.svg"
+    }
+  ],
+  "月": [
+    {
+      "stage": "oracle",
+      "label": "Oracle bone",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%9C%88-oracle.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 月-oracle-Shang.svg ” vector image is depicting the character 月 (4-stroke traditional Kangxi radical 074 月 + 2 strokes, ancient Shuowen radical 237) in the Shang oracle script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/月-oracle.svg"
+    },
+    {
+      "stage": "bronze",
+      "label": "Bronze script",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%9C%88-bronze.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 月-bronze-bronze.svg ” vector image is depicting the character 月 (4-stroke traditional Kangxi radical 074 月 + 3 strokes) in the bronze script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/月-bronze.svg"
+    },
+    {
+      "stage": "seal",
+      "label": "Small seal",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%9C%88-seal.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 月-seal-seal.svg ” vector image is depicting the character 月 (4-stroke traditional Kangxi radical 074 月 + 3 strokes) in the Shuowen seal script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/月-seal.png"
+    }
+  ],
+  "木": [
+    {
+      "stage": "oracle",
+      "label": "Oracle bone",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%9C%A8-oracle.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 木-oracle-oracle.svg ” vector image is depicting the character 木 (4-stroke traditional Kangxi radical 075 木) in the Shang oracle script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/木-oracle.png"
+    },
+    {
+      "stage": "bronze",
+      "label": "Bronze script",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%9C%A8-bronze.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 木-bronze-bronze.svg ” vector image is depicting the character 木 (4-stroke traditional Kangxi radical 075 木 + 5 strokes) in the bronze script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/木-bronze.png"
+    },
+    {
+      "stage": "seal",
+      "label": "Small seal",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%9C%A8-seal.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 木-seal.svg ” vector image is depicting the character 木 (4-stroke traditional Kangxi radical 075 木 + 3 strokes, ancient Shuowen radical 206) in the Shuowen seal script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/木-seal.png"
+    }
+  ],
+  "林": [
+    {
+      "stage": "oracle",
+      "label": "Oracle bone",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%9E%97-oracle.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 林-oracle-j14377.svg ” vector image is depicting the character 林 in the oracle script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/林-oracle.png"
+    },
+    {
+      "stage": "bronze",
+      "label": "Bronze script",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%9E%97-bronze.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 林-bronze-b08858.svg ” vector image is depicting the character 林 in the bronze script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/林-bronze.png"
+    },
+    {
+      "stage": "seal",
+      "label": "Small seal",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E6%9E%97-seal.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 林-seal.svg ” vector image is depicting the character 林 in the Shuowen seal script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/林-seal.png"
+    }
+  ],
+  "火": [
+    {
+      "stage": "oracle",
+      "label": "Oracle bone",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E7%81%AB-oracle.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 火-oracle-shang.svg ” vector image is depicting the character 火 (4-stroke traditional Kangxi radical 086 火 + 6 strokes, ancient Shuowen radical 382) in the Shang oracle script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/火-oracle.png"
+    },
+    {
+      "stage": "bronze",
+      "label": "Bronze script",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E7%81%AB-bronze.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 火-bronze-western.svg ” vector image is depicting the character 火 (4-stroke traditional Kangxi radical 086 火 + 4 strokes, ancient Shuowen radical 382) in the Western Zhou bronze script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/火-bronze.png"
+    },
+    {
+      "stage": "seal",
+      "label": "Small seal",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E7%81%AB-seal.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 火-seal.svg ” vector image is depicting the character 火 (4-stroke traditional Kangxi radical 086 火 + 4 strokes, ancient Shuowen radical 382) in the Shuowen seal script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/火-seal.png"
+    }
+  ],
+  "人": [
+    {
+      "stage": "oracle",
+      "label": "Oracle bone",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E4%BA%BA-oracle.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 人-oracle-Shang.svg ” vector image is depicting the character 人 (2-stroke traditional Kangxi radical 009 人 + 2 strokes, ancient Shuowen radical 287) in the Shang oracle script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/人-oracle.png"
+    },
+    {
+      "stage": "bronze",
+      "label": "Bronze script",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E4%BA%BA-bronze.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 人-bronze-western.svg ” vector image is depicting the character 人 (2-stroke traditional Kangxi radical 009 人 + 2 strokes, ancient Shuowen radical 287) in the Western Zhou bronze script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/人-bronze.png"
+    },
+    {
+      "stage": "seal",
+      "label": "Small seal",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E4%BA%BA-seal.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 人-seal.svg ” vector image is depicting the character 人 (2-stroke traditional Kangxi radical 009 人 + 2 strokes, ancient Shuowen radical 287) in the Shuowen seal script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/人-seal.png"
+    }
+  ],
+  "大": [
+    {
+      "stage": "oracle",
+      "label": "Oracle bone",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%A4%A7-oracle.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 大-oracle-Shang.svg ” vector image is depicting the character 大 (3-stroke traditional Kangxi radical 037 大 + 4 strokes, ancient Shuowen radical 389) in the Shang oracle script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/大-oracle.png"
+    },
+    {
+      "stage": "bronze",
+      "label": "Bronze script",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%A4%A7-bronze.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 大-bronze-western.svg ” vector image is depicting the character 大 (3-stroke traditional Kangxi radical 037 大 + 5 strokes) in the Western Zhou bronze script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/大-bronze.png"
+    },
+    {
+      "stage": "seal",
+      "label": "Small seal",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%A4%A7-seal.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 大-seal.svg ” vector image is depicting the character 大 (3-stroke traditional Kangxi radical 037 大 + 4 strokes) in the Shuowen seal script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/大-seal.png"
+    }
+  ],
+  "小": [
+    {
+      "stage": "oracle",
+      "label": "Oracle bone",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%B0%8F-oracle.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 小-oracle-oracle.svg ” vector image is depicting the character 小 (3-stroke traditional Kangxi radical 042 小) in the Shang oracle script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/小-oracle.png"
+    },
+    {
+      "stage": "bronze",
+      "label": "Bronze script",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%B0%8F-bronze.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 小-bronze-bronze.svg ” vector image is depicting the character 小 (3-stroke traditional Kangxi radical 042 小 + 3 strokes) in the bronze script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/小-bronze.png"
+    },
+    {
+      "stage": "seal",
+      "label": "Small seal",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%B0%8F-seal.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 小-seal.svg ” vector image is depicting the character 小 (3-stroke traditional Kangxi radical 042 小 + 3 strokes, ancient Shuowen radical 015) in the Shuowen seal script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/小-seal.png"
+    }
+  ],
+  "口": [
+    {
+      "stage": "oracle",
+      "label": "Oracle bone",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%8F%A3-oracle.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 口-oracle-Shang.svg ” vector image is depicting the character 口 in the Shang oracle script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/口-oracle.png"
+    },
+    {
+      "stage": "bronze",
+      "label": "Bronze script",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%8F%A3-bronze.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 口-bronze-west.svg ” vector image is depicting the character 口 (3-stroke traditional Kangxi radical 030 口 + 2 strokes) in the Western Zhou bronze script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/口-bronze.png"
+    },
+    {
+      "stage": "seal",
+      "label": "Small seal",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E5%8F%A3-seal.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 口-seal.svg ” vector image is depicting the character 口 (3-stroke traditional Kangxi radical 030 口 + 2 strokes, ancient Shuowen radical 022) in the Shuowen seal script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/口-seal.png"
+    }
+  ],
+  "田": [
+    {
+      "stage": "oracle",
+      "label": "Oracle bone",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E7%94%B0-oracle.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 田-oracle-Shang.svg ” vector image is depicting the character 田 (5-stroke traditional Kangxi radical 102 田 + 5 strokes, ancient Shuowen radical 484) in the Shang oracle script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/田-oracle.png"
+    },
+    {
+      "stage": "bronze",
+      "label": "Bronze script",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E7%94%B0-bronze.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 田-bronze-western.svg ” vector image is depicting the character 田 (5-stroke traditional Kangxi radical 102 田 + 3 strokes, ancient Shuowen radical 484) in the Western Zhou bronze script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/田-bronze.png"
+    },
+    {
+      "stage": "seal",
+      "label": "Small seal",
+      "available": true,
+      "source": "https://commons.wikimedia.org/wiki/File:%E7%94%B0-seal.svg",
+      "license": "Public domain",
+      "artist": "Digital file creation, see the contributor names shown in the “ User ” column of the “ File history ” section below.",
+      "description": "This “ 田-seal.svg ” vector image is depicting the character 田 (5-stroke traditional Kangxi radical 102 田 + 3 strokes, ancient Shuowen radical 484) in the Shuowen seal script style . See also Wiktionary: en , fr , ja , zh .",
+      "file": "/evolution/田-seal.png"
+    }
+  ]
+}

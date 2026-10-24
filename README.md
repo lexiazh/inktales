@@ -1,6 +1,6 @@
 # InkTales
 
-English-first Chinese-character learning, inspired by traditional watercolor landscapes and rice paper. The app opens on the full-page framed flashcard and includes a home page, 12-character explorer, learning path, local progress, bookmarks, memory ratings, animated stroke playback, stroke tracing, quizzes, contextual and standalone learning companions.
+English-first Chinese-character learning, inspired by traditional watercolor landscapes and rice paper. The app opens on the full-page framed flashcard and includes a home page, 12-character explorer, learning path, local progress, bookmarks, sourced historical forms with hover highlights, animated stroke playback, stroke tracing, quizzes, contextual and standalone learning companions.
 
 ## Run
 
@@ -20,7 +20,7 @@ npm run build
 
 ## Course and imagery
 
-`lib/lessons.ts` contains 12 original lessons. All stories are explicitly labeled mnemonics. No unreviewed historical forms or etymological claims are presented as fact. Stroke data and Hanzi Writer are bundled under `public/data` and `public/vendor`, including licenses. Two original generated watercolor assets live in `public/assets`. The supplied UI reference informed the design and is not distributed.
+`lib/lessons.ts` contains 12 original lessons. All stories are explicitly labeled mnemonics. No unreviewed historical forms or etymological claims are presented as fact. Stroke data and Hanzi Writer are bundled under `public/data` and `public/vendor`, including licenses. Twelve focused watercolor illustrations live in `public/assets/characters`. Two earlier landscape paintings remain for the home and companion pages. The sourced historical forms and public-domain/CC0 metadata are bundled under `public/evolution` and `lib/evolution-data.json`. The supplied UI reference informed the design and is not distributed.
 
 ## Optional real AI
 
@@ -32,7 +32,7 @@ Questions are 1–600 characters, history is capped to six messages, responses a
 
 ## Storage
 
-Browser local storage only: `inktales-progress-v1`, `inktales-bookmarks`, and `inktales-settings`. Reset learning progress is available in settings; clear site data to remove all local information. Review grades schedule a next-review timestamp; this MVP does not claim a validated adaptive spaced-repetition algorithm.
+Browser local storage only: `inktales-progress-v1`, `inktales-bookmarks`, and `inktales-settings`. Reset learning progress is available in settings; clear site data to remove all local information. Answer the practice question correctly and choose Complete & continue to save completion. Earlier review records remain intact; no review-rating controls are shown. Flashcards use a fixed viewport layout with a left navigation rail and a historical-form strip.
 
 ## Before a public educational launch
 

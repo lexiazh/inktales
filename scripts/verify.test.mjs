@@ -5,6 +5,7 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {lessons,staticAnswer} from '../lib/lessons.ts';
+import {recordCompletion} from '../lib/progress.ts';
 
 const testEnv={};globalThis.__INKTALES_TEST_ENV=testEnv;
 const apiBundle=await build({entryPoints:['app/api/assistant/route.ts'],bundle:true,platform:'node',format:'esm',write:false,plugins:[{name:'test-env',setup(b){b.onResolve({filter:/^cloudflare:workers$/},()=>({path:'test-env',namespace:'test'}));b.onLoad({filter:/.*/,namespace:'test'},()=>({contents:'export const env=globalThis.__INKTALES_TEST_ENV',loader:'js'}));}}]});
@@ -45,5 +46,22 @@ test('initial flashcard renders semantic content without a browser',async()=>{
  await build({entryPoints:['components/inktales.tsx'],bundle:true,platform:'node',format:'esm',outfile:out,external:['react','react-dom','lucide-react'],jsx:'automatic'});
  const {default:InkTales}=await import(pathToFileURL(out).href);
  const {renderToString}=await import('react-dom/server');const {createElement}=await import('react');
- const html=renderToString(createElement(InkTales));assert.match(html,/Every character tells a story/);assert.match(html,/flashcard-frame/);assert.match(html,/role="tablist"/);assert.match(html,/A memory story, not a historical explanation/);assert.doesNotMatch(html,/dummy-key|GEMINI_API_KEY/);
+ const html=renderToString(createElement(InkTales));assert.match(html,/Flashcards/);assert.doesNotMatch(html,/Every character tells a story|Let it sink in|A little ink. A world of meaning.|rating-button|mnemonic-note/);assert.match(html,/flashcard-frame/);assert.match(html,/role="tablist"/);assert.match(html,/Character evolution/);assert.match(html,/Oracle bone/);assert.match(html,/Complete &amp; continue|Story/);assert.doesNotMatch(html,/dummy-key|GEMINI_API_KEY/);
+});
+
+test('every character has its own focused illustration and descriptive alternative text',async()=>{
+ for(const l of lessons){assert.ok(l.imageAlt.length>20);assert.ok((await readFile(`public/assets/characters/${l.id}.webp`)).length>1000);}
+ assert.equal(new Set(lessons.map(l=>l.image)).size,12);
+});
+test('completion replaces the removed rating controls without mutating earlier progress',()=>{
+ const earlier={water:{learned:true,reviewedAt:100,due:200,rating:'Good'}};
+ const result=recordCompletion(earlier,'mountain',1000);
+ assert.equal(earlier.mountain,undefined);assert.deepEqual(result.water,earlier.water);
+ assert.deepEqual(result.mountain,{learned:true,reviewedAt:1000,due:86401000,rating:'Completed'});
+});
+test('all twelve evolution records use sourced, licensed glyphs',async()=>{
+ const sources=JSON.parse(await readFile('public/evolution/sources.json','utf8'));
+ for(const l of lessons){const forms=sources[l.char];assert.equal(forms.length,3);assert.equal(new Set(forms.map(f=>f.stage)).size,3);assert.ok(forms.filter(f=>f.available).length>0,'No historical forms: '+l.char);
+  for(const f of forms.filter(f=>f.available)){assert.match(f.source,/^https:\/\/commons\.wikimedia\.org\//);assert.match(f.license,/Public domain|CC0/);const bytes=await readFile('public'+f.file);assert.ok(bytes.length>100);if(f.file.endsWith('.svg'))assert.doesNotMatch(bytes.toString(),/<script|<foreignObject|(?:href|xlink:href)\s*=\s*["']https?:/i);}
+ }
 });
