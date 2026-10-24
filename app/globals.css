@@ -378,3 +378,33 @@ body{font-size:16px}
 :root{--serif:'Cormorant Garamond','InkTales Kai','InkTales Kai Extended',Georgia,serif}
 .momo-welcome-art{mask-image:radial-gradient(ellipse,#000 48%,transparent 73%)}
 .flashcards-shell .toast{left:calc(50% + var(--rail)/2);bottom:89px;max-width:calc(100% - var(--rail) - 24px);width:max-content}
+/* Focused flashcard controls from the annotated review. */
+.flashcard-toolbar{justify-content:center}
+.story-heading{display:flex;align-items:center;gap:9px;font-family:var(--sans);font-size:17px;font-weight:500;min-height:48px;border-bottom:1px solid var(--line);color:#355a43;flex-shrink:0}
+.story-heading>svg{width:22px;height:22px}
+.review-actions button{min-width:57px;width:57px;height:50px;padding:8px;gap:0}
+.animated-hanzi{width:1em;height:1em;flex-shrink:0}
+.resting-hanzi{display:block;line-height:1}
+.stroke-canvas{position:absolute;inset:0;width:100%;height:100%;visibility:hidden;pointer-events:none}
+.stroke-canvas svg{width:100%;height:100%;display:block}
+.is-playing .resting-hanzi{visibility:hidden}
+.is-playing .stroke-canvas{visibility:visible}
+.writing-dialog{width:550px;max-height:calc(100dvh - 28px);padding:24px 28px;overflow:auto}
+.writing-dialog .dialog-heading{gap:12px}.writing-dialog .dialog-heading h2{font-size:31px;margin:0;line-height:1.2}
+.writing-dialog .dialog-heading h2>span{margin-left:8px}
+.writing-dialog-body{height:410px;max-height:calc(100dvh - 140px);min-height:300px;display:flex;flex-direction:column;gap:7px;margin-top:12px}
+.writing-dialog-body .writing-grid{width:180px}.writing-dialog-body .writing-stage{min-height:185px}
+.writing-dialog-body .writing-content{gap:10px;padding-top:5px}
+.writing-dialog-body .writing-controls button{font-size:15px;min-height:46px;padding:11px 16px}
+.writing-dialog-body .writing-feedback{display:block;font-size:12px;line-height:1.4}
+.writing-dialog-body .practice-next{font-size:14px;min-height:44px}
+.writing-dialog-body .practice-content{flex:1;gap:14px}
+.writing-dialog-body .answer-option{min-height:50px;font-size:16px;padding:12px}
+.writing-dialog-body .answer-feedback{font-size:13px;min-height:40px}
+.writing-dialog-body .complete-lesson{min-height:47px;font-size:15px}
+@media(max-width:760px){
+ .flashcard-toolbar{justify-content:center;min-height:59px}.story-heading{font-size:14px;min-height:41px;gap:7px}.story-heading>svg{height:18px;width:18px}
+ .review-actions button{min-width:49px;width:49px;min-height:45px;height:45px;padding:7px}.review-actions button>svg{width:27px;height:27px}
+ .writing-dialog{padding:20px;max-width:calc(100% - 24px)}.writing-dialog .dialog-heading h2{font-size:27px}.writing-dialog-body{height:410px;max-height:calc(100dvh - 128px);min-height:285px}.writing-dialog-body .writing-grid{width:150px}.writing-dialog-body .writing-stage{min-height:154px}.writing-dialog-body .writing-controls button{font-size:13px;min-height:44px;padding:10px 13px}.writing-dialog-body .writing-feedback{font-size:11px}.writing-dialog-body .practice-next{font-size:12px}.writing-dialog-body .practice-content{gap:11px}.writing-dialog-body .answer-option{font-size:14px;padding:10px}.writing-dialog-body .answer-feedback{font-size:12px;min-height:43px}.writing-dialog-body .complete-lesson{font-size:14px}
+}
+@media(max-height:700px) and (max-width:760px){.flashcard-toolbar{min-height:52px}.story-heading{min-height:35px;font-size:13px}.writing-dialog-body .writing-grid{width:125px}.writing-dialog-body .writing-stage{min-height:130px}.writing-dialog-body .writing-content{gap:7px}.writing-dialog-body .writing-feedback{font-size:10px}}

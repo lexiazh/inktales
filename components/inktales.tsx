@@ -6,12 +6,12 @@ import {lessons,staticAnswer,type Lesson,type Progress} from '@/lib/lessons';
 import evolutionData from '@/lib/evolution-data.json';
 import {recordCompletion,recordAgain} from '@/lib/progress';
 import {JourneyDashboard} from './journey-dashboard';
+import {CharacterIllustration} from './character-illustration';
+import {loadHanziWriter,type Writer} from '@/lib/hanzi-client';
 
 type View='learn'|'explore'|'journey'|'assistant'|'home';
 type Tab='story'|'writing'|'practice';
 type Message={role:'user'|'assistant';text:string;offline?:boolean};
-type Writer={animateCharacter:()=>Promise<void>;quiz:(options:Record<string,unknown>)=>void;cancelQuiz:()=>void};
-declare global {interface Window {HanziWriter?: {create:(element:HTMLElement,char:string,options:Record<string,unknown>)=>Writer}}}
 const STORAGE='inktales-progress-v1';
 function loadObject<T,>(key:string,fallback:T):T {try {const raw=localStorage.getItem(key);return raw?JSON.parse(raw):fallback;}catch{return fallback;}}
 function CornerMarks(){return <><i className="corner tl"/><i className="corner tr"/><i className="corner bl"/><i className="corner br"/></>}
@@ -31,6 +31,8 @@ export default function InkTales(){
  const [filter,setFilter]=useState('All characters');
  const [query,setQuery]=useState('');
  const [drawerOpen,setDrawerOpen]=useState(false);
+ const [writingOpen,setWritingOpen]=useState(false);
+ const writingDialog=useRef<HTMLDialogElement>(null);
  const [speaking,setSpeaking]=useState(false);
  const [chatSession,setChatSession]=useState(0);
  const settings=useRef<HTMLDialogElement>(null);
@@ -52,7 +54,7 @@ export default function InkTales(){
  useEffect(()=>{if(!loaded)return;try{localStorage.setItem(STORAGE,JSON.stringify(progress));}catch{notify('Your browser could not save progress. You can keep learning in this session.');}},[progress,loaded,notify]);
  useEffect(()=>{if(!loaded)return;try{localStorage.setItem('inktales-bookmarks',JSON.stringify(bookmarks));}catch{}},[bookmarks,loaded]);
  useEffect(()=>{if(!loaded)return;try{localStorage.setItem('inktales-settings',JSON.stringify({sound,calm}));}catch{}document.documentElement.classList.toggle('calm',calm);},[sound,calm,loaded]);
- useEffect(()=>{setTab('story');setAnswer(null);if('speechSynthesis'in window)window.speechSynthesis.cancel();setSpeaking(false);},[index]);
+ useEffect(()=>{setTab('story');setAnswer(null);writingDialog.current?.close();if('speechSynthesis'in window)window.speechSynthesis.cancel();setSpeaking(false);},[index]);
  const navigate=useCallback((v:View,id?:string)=>{location.hash=v+(id?'/'+id:'');setView(v);if(id){const n=lessons.findIndex(l=>l.id===id);if(n>=0)setIndex(n);}window.scrollTo({top:0,behavior:'instant'});},[]);
  const selectLesson=useCallback((n:number)=>{if(n<0||n>=lessons.length)return;navigate('learn',lessons[n].id);setTab('story');setAnswer(null);},[navigate]);
  const reviewCard=(remembered:boolean)=>{
@@ -62,11 +64,12 @@ export default function InkTales(){
  };
  const complete=()=>{
   if(!correct)return;
+  writingDialog.current?.close();
   setProgress(p=>recordCompletion(p,lesson.id));
   notify(`${lesson.char} learned. Your progress is saved.`);
   if(index<lessons.length-1)selectLesson(index+1);else navigate('journey');
  };
- useEffect(()=>{const onKey=(e:KeyboardEvent)=>{const el=e.target as HTMLElement;if(['INPUT','TEXTAREA','SELECT','BUTTON'].includes(el.tagName)||el.isContentEditable||settings.current?.open||drawer.current?.open||view!=='learn')return;
+ useEffect(()=>{const onKey=(e:KeyboardEvent)=>{const el=e.target as HTMLElement;if(['INPUT','TEXTAREA','SELECT','BUTTON'].includes(el.tagName)||el.isContentEditable||settings.current?.open||drawer.current?.open||writingDialog.current?.open||view!=='learn')return;
   if(e.key==='ArrowRight'){e.preventDefault();selectLesson(index+1);}if(e.key==='ArrowLeft'){e.preventDefault();selectLesson(index-1);}if(tab==='practice'&&['1','2','3','4'].includes(e.key)){e.preventDefault();setAnswer(lesson.choices[Number(e.key)-1]);}
  };window.addEventListener('keydown',onKey);return()=>window.removeEventListener('keydown',onKey);},[view,index,selectLesson,tab,lesson]);
  const speak=()=>{
@@ -77,6 +80,7 @@ export default function InkTales(){
   window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(lesson.char);utterance.lang='zh-CN';utterance.voice=voice;utterance.rate=.75;utterance.onend=()=>setSpeaking(false);utterance.onerror=()=>{setSpeaking(false);notify('Audio could not play. Pinyin: '+lesson.pinyin);};setSpeaking(true);window.speechSynthesis.speak(utterance);
  };
  const toggleBookmark=()=>{setBookmarks(b=>b.includes(lesson.id)?b.filter(id=>id!==lesson.id):[...b,lesson.id]);};
+ const openWriting=()=>{setTab('writing');setWritingOpen(true);writingDialog.current?.showModal();};
  const openHelper=()=>{setDrawerOpen(true);drawer.current?.showModal();};
  const fullScreen=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{notify('Full screen is unavailable here. Open the site in a browser tab for a larger view.');}};
  const visibleLessons=lessons.filter(l=>(filter==='All characters'||filter===l.category||(filter==='Saved'&&bookmarks.includes(l.id))||(filter==='Learned'&&progress[l.id]?.learned))&&`${l.char} ${l.meaning} ${l.pinyin} ${l.plain}`.toLowerCase().includes(query.toLowerCase()));
@@ -91,24 +95,19 @@ export default function InkTales(){
   <main id="main" className={'main-content view-'+view}>
    {view==='learn'&&<section className="flashcard-frame" aria-label={'Flashcard: '+lesson.char+', '+lesson.meaning}>
     <CornerMarks/>
-    <div className="flashcard-toolbar"><div className="flashcard-context"><h1>Flashcards</h1><span className="lesson-guide">See it. Write it. Remember it.</span></div><label className="lesson-index"><span>Character</span><select value={index} aria-label="Choose flashcard" onChange={e=>selectLesson(Number(e.target.value))}>{lessons.map((l,n)=><option key={l.id} value={n}>{n===index?`${String(n+1).padStart(2,'0')} / 12`:`${String(n+1).padStart(2,'0')} · ${l.char} ${l.meaning}`} </option>)}</select><ChevronDown size={20}/></label></div>
+    <div className="flashcard-toolbar"><label className="lesson-index"><select value={index} aria-label="Choose flashcard" onChange={e=>selectLesson(Number(e.target.value))}>{lessons.map((l,n)=><option key={l.id} value={n}>{n===index?`${String(n+1).padStart(2,'0')} / 12`:`${String(n+1).padStart(2,'0')} · ${l.char} ${l.meaning}`} </option>)}</select><ChevronDown size={20}/></label></div>
     <div className="card-surface">
      <div className={'character-panel '+lesson.tint} key={lesson.id}>
-      <div className="character-visual"><figure className="character-art"><img src={'/assets/characters/'+lesson.id+'.webp'} alt={lesson.imageAlt} fetchPriority="high"/></figure><span className="character-hanzi" lang="zh-CN">{lesson.char}</span></div>
-      <div className="character-center"><div className="pinyin">{lesson.pinyin}</div><div className="character-tools"><button onClick={speak} className={'pronunciation-button '+(speaking?'speaking':'')} aria-label={'Hear '+lesson.pinyin}><Volume2 size={24} strokeWidth={1.6}/><span>Listen</span></button><button onClick={()=>setTab('writing')} className="pronunciation-button" aria-label="Explore stroke order"><Play size={24} strokeWidth={1.6}/><span>Strokes</span></button></div></div>
+      <CharacterIllustration key={lesson.id} lesson={lesson} speaking={speaking} onListen={speak} onError={notify}/>
      </div>
      <div className="lesson-panel">
-      <div className="meaning-heading"><div><span className="lesson-category">{lesson.category} · {lesson.strokes} strokes</span><h2>{lesson.meaning}</h2></div><button className={'bookmark-control '+(bookmarks.includes(lesson.id)?'is-saved':'')} aria-label={bookmarks.includes(lesson.id)?'Remove bookmark':'Save character'} aria-pressed={bookmarks.includes(lesson.id)} onClick={toggleBookmark}><Bookmark size={23} fill={bookmarks.includes(lesson.id)?'currentColor':'none'}/><span>{bookmarks.includes(lesson.id)?'Saved':'Save'}</span></button></div>
-      <div className="lesson-tabs" role="tablist" aria-label="Lesson steps">{([{id:'story',label:'Story',icon:BookOpen},{id:'writing',label:'Stroke order',icon:PenLine},{id:'practice',label:'Practice',icon:Feather}] as const).map((t,n)=><button id={'tab-'+t.id} role="tab" aria-selected={tab===t.id} aria-controls={'panel-'+t.id} key={t.id} onClick={()=>setTab(t.id)} className={tab===t.id?'selected':''}><span className="step-index">{n+1}</span><span>{t.label}</span>{t.id==='practice'&&correct&&<Check size={14}/>}</button>)}</div>
-      <div className="tab-content" id={'panel-'+tab} role="tabpanel" aria-labelledby={'tab-'+tab} tabIndex={0}>
-       {tab==='story'&&<div className="story-content"><p className="story-text">{lesson.story}</p><div className="memory-note"><MemorySketch id={lesson.id}/><p>{lesson.visual}</p></div><button className="primary-button story-next" onClick={()=>setTab('writing')}><PenLine size={21}/>Practice writing</button></div>}
-       {tab==='writing'&&<Writing key={lesson.id} lesson={lesson} onContinue={()=>setTab('practice')}/>}
-       {tab==='practice'&&<div className="practice-content"><h3>What does <span lang="zh-CN">{lesson.char}</span> mean?</h3><div className="answer-options">{lesson.choices.map((choice,n)=><button key={choice} onClick={()=>setAnswer(choice)} className={(answer===choice?(correct?'correct':'incorrect'):'')+' answer-option'}><span className="answer-letter">{String.fromCharCode(65+n)}</span>{choice}{answer===choice&&(correct?<CheckCircle2 size={20}/>:<X size={20}/>)}</button>)}</div><div className={'answer-feedback '+(answer?(correct?'success':'try-again'):'')} aria-live="polite">{answer?(correct?<><CheckCircle2 size={18}/><span>Well remembered. Make it part of your journey.</span></>:<><RotateCcw size={17}/><span>Not quite. Try picturing {lesson.meaning}.</span></>):<span>Choose the meaning that matches this character.</span>}</div><button className="primary-button complete-lesson" disabled={!correct} onClick={complete}>{index===lessons.length-1?'Complete this chapter':'Complete & continue'}<Check size={21}/></button></div>}
-      </div>
+      <div className="meaning-heading"><div><h2>{lesson.meaning}</h2></div><button className={'bookmark-control '+(bookmarks.includes(lesson.id)?'is-saved':'')} aria-label={bookmarks.includes(lesson.id)?'Remove bookmark':'Save character'} aria-pressed={bookmarks.includes(lesson.id)} onClick={toggleBookmark}><Bookmark size={23} fill={bookmarks.includes(lesson.id)?'currentColor':'none'}/><span>{bookmarks.includes(lesson.id)?'Saved':'Save'}</span></button></div>
+      <h3 className="story-heading"><BookOpen size={22}/>Story</h3>
+      <div className="tab-content story-panel"><div className="story-content"><p className="story-text">{lesson.story}</p><div className="memory-note"><MemorySketch id={lesson.id}/><p>{lesson.visual}</p></div><button className="primary-button story-next" onClick={openWriting}><PenLine size={21}/>Practice writing</button></div></div>
       <Evolution lesson={lesson}/>
      </div>
     </div>
-    <div className="flashcard-footer"><button className="ask-inline" onClick={openHelper}><Sparkles size={24}/><span>Ask Momo <span lang="zh-CN">墨墨</span></span></button><div className="review-actions" aria-label="How well do you remember this character?"><button className="review-again" onClick={()=>reviewCard(false)} aria-label="Again — revisit this character"><X size={27}/><span>Again</span></button><button className="review-remember" onClick={()=>reviewCard(true)} aria-label="Got it — remember and continue"><Check size={28}/><span>Got it</span></button></div><button className="icon-button expand-button" aria-label="Expand to full screen" onClick={fullScreen}><Maximize2 size={23}/></button></div>
+    <div className="flashcard-footer"><button className="ask-inline" onClick={openHelper}><Sparkles size={24}/><span>Ask Momo <span lang="zh-CN">墨墨</span></span></button><div className="review-actions" aria-label="How well do you remember this character?"><button className="review-again" onClick={()=>reviewCard(false)} aria-label="Again — revisit this character" title="Again — revisit this character"><X size={30}/></button><button className="review-remember" onClick={()=>reviewCard(true)} aria-label="Got it — remember and continue" title="Got it — remember and continue"><Check size={31}/></button></div><button className="icon-button expand-button" aria-label="Expand to full screen" onClick={fullScreen}><Maximize2 size={23}/></button></div>
    </section>}
    {view==='home'&&<>
     <section className="home-hero"><img src="/assets/mountain.webp" alt="A hand-painted landscape of misty Chinese mountains"/><div className="home-hero-veil"/><div className="home-copy"><span className="eyebrow">A QUIETER WAY TO LEARN CHINESE</span><h1>A little ink.<br/>A world of <em>meaning.</em></h1><p>Discover the stories behind Chinese characters.<br/>One picture, one story, one small step at a time.</p><div className="home-ctas"><button className="primary-button" onClick={()=>selectLesson(Math.max(0,lessons.findIndex(l=>!progress[l.id]?.learned)))}>Start learning<ArrowRight size={18}/></button><button className="text-button" onClick={()=>navigate('explore')}>Explore characters<ArrowRight size={16}/></button></div><span className="no-account"><Leaf size={14}/>No account. No pressure. Just curiosity.</span></div><span className="home-hanzi" lang="zh-CN">山水</span><CornerMarks/></section>
@@ -124,6 +123,9 @@ export default function InkTales(){
    {view==='assistant'&&<section className="momo-page"><div className="momo-page-heading"><div className="momo-identity"><img src="/assets/momo.webp" alt="Momo, a smiling watercolor ink companion"/><div><h1>Momo <span lang="zh-CN">墨墨</span></h1><p>Your Chinese learning companion</p></div></div><button className="secondary-button" aria-label="New chat" title="Start a new chat" onClick={()=>setChatSession(n=>n+1)}><MessageCircle size={23}/>New chat</button></div><div className="momo-lesson-picker"><label htmlFor="momo-lesson">Learning today</label><div><select id="momo-lesson" value={index} onChange={e=>setIndex(Number(e.target.value))}>{lessons.map((l,n)=><option key={l.id} value={n}>{l.char} · {l.pinyin} · {l.meaning}</option>)}</select><ChevronDown size={20}/></div><button className="text-button" onClick={()=>selectLesson(index)}><BookOpen size={19}/>Open flashcard</button></div><AssistantChat key={lesson.id+'-'+chatSession} lesson={lesson}/></section>}
   </main>
   {view!=='learn'&&view!=='assistant'&&<footer className="site-footer"><a className="footer-brand" href="#home" onClick={()=>navigate('home')}>InkTales<span>一笔一故事</span></a><span>Small steps. Lasting stories.</span><a href="/credits" target="_blank" rel="noreferrer">Credits & sources<ArrowUpRightIcon/></a></footer>}
+  <dialog className="writing-dialog paper-dialog" aria-label="Writing practice" ref={writingDialog} onClose={()=>setWritingOpen(false)}><div className="dialog-heading"><h2>{tab==='practice'?'A little practice':'Practice writing'} <span lang="zh-CN">{lesson.char}</span></h2><button className="icon-button" aria-label="Close writing practice" onClick={()=>writingDialog.current?.close()}><X size={24}/></button></div>{writingOpen&&<div className="writing-dialog-body">{tab==='writing'&&<Writing key={lesson.id} lesson={lesson} onContinue={()=>setTab('practice')}/>}
+       {tab==='practice'&&<div className="practice-content"><h3>What does <span lang="zh-CN">{lesson.char}</span> mean?</h3><div className="answer-options">{lesson.choices.map((choice,n)=><button key={choice} onClick={()=>setAnswer(choice)} className={(answer===choice?(correct?'correct':'incorrect'):'')+' answer-option'}><span className="answer-letter">{String.fromCharCode(65+n)}</span>{choice}{answer===choice&&(correct?<CheckCircle2 size={20}/>:<X size={20}/>)}</button>)}</div><div className={'answer-feedback '+(answer?(correct?'success':'try-again'):'')} aria-live="polite">{answer?(correct?<><CheckCircle2 size={18}/><span>Well remembered. Make it part of your journey.</span></>:<><RotateCcw size={17}/><span>Not quite. Try picturing {lesson.meaning}.</span></>):<span>Choose the meaning that matches this character.</span>}</div><button className="primary-button complete-lesson" disabled={!correct} onClick={complete}>{index===lessons.length-1?'Complete this chapter':'Complete & continue'}<Check size={21}/></button></div>}
+{tab==='practice'&&<button className="text-button" onClick={()=>setTab('writing')}><PenLine size={18}/>Back to writing</button>}</div>}</dialog>
   <dialog className="settings-dialog paper-dialog" aria-label="Learning settings" ref={settings} onClose={()=>setResetConfirm(false)}><div className="dialog-heading"><span className="eyebrow">MAKE YOURSELF AT HOME</span><button className="icon-button" aria-label="Close settings" onClick={()=>settings.current?.close()}><X size={20}/></button></div><h2>A space for your pace.</h2><p className="dialog-intro">A few little comforts for your learning ritual.</p><label className="preference-row"><span><strong>Pronunciation audio</strong><small>Use your device’s Mandarin voice.</small></span><input type="checkbox" checked={sound} onChange={e=>setSound(e.target.checked)}/></label><label className="preference-row"><span><strong>A calmer experience</strong><small>Reduce decorative motion and transitions.</small></span><input type="checkbox" checked={calm} onChange={e=>setCalm(e.target.checked)}/></label><div className="settings-storage"><Leaf size={18}/><p>Progress and saved characters stay in this browser. No account or personal details needed.</p></div><div className="reset-area">{resetConfirm?<><p>Reset all learning progress on this device? Saved characters will stay.</p><button className="danger-button" onClick={()=>{setProgress({});setResetConfirm(false);notify('A fresh page. Your learning progress has been reset.');settings.current?.close();}}>Yes, start fresh</button><button className="text-button" onClick={()=>setResetConfirm(false)}>Keep my progress</button></>:<button className="text-button reset-button" onClick={()=>setResetConfirm(true)}><RotateCcw size={14}/>Reset learning progress</button>}</div><a className="credits-link" href="/credits" target="_blank" rel="noreferrer">Credits, content & privacy<ArrowUpRightIcon/></a></dialog>
   <dialog className="assistant-drawer" aria-label="Momo 墨墨 learning companion" ref={drawer} onClose={()=>setDrawerOpen(false)}><div className="drawer-heading"><div><Sparkles size={20}/><span>Momo <span lang="zh-CN">墨墨</span><small>Your Chinese learning companion</small></span></div><button className="icon-button" aria-label="Close Momo" onClick={()=>drawer.current?.close()}><X size={20}/></button></div>{drawerOpen&&<AssistantChat key={lesson.id} lesson={lesson} compact/>}</dialog>
   <div className={'toast '+(toast?'visible':'')} role="status" aria-live="polite"><Leaf size={17}/>{toast}</div>
@@ -138,7 +140,7 @@ function Writing({lesson,onContinue}:{lesson:Lesson;onContinue:()=>void}){
  useEffect(()=>{
   let disposed=false;const controller=new AbortController();
   const init=async()=>{try{
-   if(!window.HanziWriter){await new Promise<void>((resolve,reject)=>{const existing=document.querySelector<HTMLScriptElement>('script[data-hanzi]');if(existing){if(window.HanziWriter)resolve();else{existing.addEventListener('load',()=>resolve(),{once:true});existing.addEventListener('error',reject,{once:true});}return;}const script=document.createElement('script');script.src='/vendor/hanzi-writer.min.js';script.dataset.hanzi='true';script.onload=()=>resolve();script.onerror=()=>{script.remove();reject(new Error('Writing library unavailable'));};document.head.appendChild(script);});}
+   await loadHanziWriter();
    const res=await fetch('/data/'+encodeURIComponent(lesson.char)+'.json',{signal:controller.signal});if(!res.ok)throw new Error('Data unavailable');const data=await res.json();
    if(disposed||!target.current||!window.HanziWriter)return;target.current.replaceChildren();writer.current=window.HanziWriter.create(target.current,lesson.char,{width:Math.max(90,Math.min(196,target.current.clientWidth)),height:Math.max(90,Math.min(196,target.current.clientWidth)),padding:13,strokeColor:'#354c47',outlineColor:'#e6dfd1',radicalColor:'#a45843',showOutline:true,strokeAnimationSpeed:.8,delayBetweenStrokes:250,charDataLoader:(_char:string,onLoad:(data:unknown)=>void)=>onLoad(data)});setStatus('ready');
   }catch{if(!disposed)setStatus('error');}};init();return()=>{disposed=true;controller.abort();writer.current?.cancelQuiz();writer.current=null;};

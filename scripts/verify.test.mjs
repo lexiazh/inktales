@@ -46,7 +46,7 @@ test('initial flashcard renders semantic content without a browser',async()=>{
  await build({entryPoints:['components/inktales.tsx'],bundle:true,platform:'node',format:'esm',outfile:out,external:['react','react-dom','lucide-react'],jsx:'automatic'});
  const {default:InkTales}=await import(pathToFileURL(out).href);
  const {renderToString}=await import('react-dom/server');const {createElement}=await import('react');
- const html=renderToString(createElement(InkTales));assert.match(html,/Flashcards/);assert.match(html,/Momo/);assert.match(html,/Choose flashcard/);assert.match(html,/Again — revisit this character/);assert.match(html,/Got it — remember and continue/);assert.doesNotMatch(html,/Previous character|Next character/);assert.doesNotMatch(html,/Every character tells a story|Let it sink in|A little ink. A world of meaning.|rating-button|mnemonic-note/);assert.match(html,/flashcard-frame/);assert.match(html,/role="tablist"/);assert.match(html,/Character evolution/);assert.match(html,/Oracle bone/);assert.match(html,/Complete &amp; continue|Story/);assert.doesNotMatch(html,/dummy-key|GEMINI_API_KEY/);
+ const html=renderToString(createElement(InkTales));assert.match(html,/Flashcards/);assert.match(html,/Momo/);assert.match(html,/Choose flashcard/);assert.match(html,/Again — revisit this character/);assert.match(html,/Got it — remember and continue/);assert.doesNotMatch(html,/Previous character|Next character/);assert.doesNotMatch(html,/Every character tells a story|Let it sink in|A little ink. A world of meaning.|rating-button|mnemonic-note/);assert.match(html,/flashcard-frame/);assert.doesNotMatch(html,/role="tablist"|tab-writing|tab-practice|lesson-category|lesson-guide|flashcard-context/);assert.match(html,/Play strokes on the character/);assert.match(html,/aria-label="Writing practice"/);assert.doesNotMatch(html,/>Again<|>Got it<|>Character<|See it. Write it. Remember it./);assert.match(html,/Character evolution/);assert.match(html,/Oracle bone/);assert.match(html,/Complete &amp; continue|Story/);assert.doesNotMatch(html,/dummy-key|GEMINI_API_KEY/);
 });
 
 test('every character has its own focused illustration and descriptive alternative text',async()=>{
@@ -80,4 +80,16 @@ test('journey summaries use saved dates, including retries, with local calendar 
 test('Momo artwork and self-hosted Kai font with license are bundled',async()=>{
  for(const p of ['assets/momo.webp','assets/inktales-kai.woff2','assets/inktales-kai-extended.woff2','assets/LXGW-WenKai-OFL.txt'])assert.ok((await readFile('public/'+p)).length>1000,p);
  const font=await readFile('public/assets/inktales-kai.woff2');assert.equal(font.subarray(0,4).toString(),'wOF2');assert.ok(font.length<50000,'Initial character font should stay small');
+});
+
+test('Hanzi library loads once for concurrent readers and can retry after a failed load',async()=>{
+ const {loadHanziWriter}=await import('../lib/hanzi-client.ts');
+ const originalWindow=globalThis.window,originalDocument=globalThis.document;const scripts=[];
+ try{
+  globalThis.window={};globalThis.document={createElement:()=>({dataset:{},remove(){this.removed=true;}}),head:{appendChild(script){scripts.push(script);}}};
+  const first=loadHanziWriter(),parallel=loadHanziWriter();assert.equal(first,parallel);assert.equal(scripts.length,1);
+  scripts[0].onerror();await assert.rejects(first,/Writing library unavailable/);assert.equal(scripts[0].removed,true);
+  const retry=loadHanziWriter();assert.equal(scripts.length,2);globalThis.window.HanziWriter={create(){}};scripts[1].onload();await retry;
+  await loadHanziWriter();assert.equal(scripts.length,2);
+ }finally{if(originalWindow===undefined)delete globalThis.window;else globalThis.window=originalWindow;if(originalDocument===undefined)delete globalThis.document;else globalThis.document=originalDocument;}
 });

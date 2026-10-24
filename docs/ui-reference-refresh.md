@@ -19,3 +19,7 @@ Built-in imagegen was used. Deployed asset: public/assets/momo.webp, resized to 
 Final prompt:
 
 > Use case: illustration-story. Asset type: small companion avatar for InkTales, a refined beginner Chinese learning web app. Create one original friendly watercolor ink creature named Momo: a round soft charcoal-black ink puff, warm ivory face, two simple closed smiling eyes, tiny smile, subtle blush, little ink droplets around the top. Similar mood to a gentle painted ink spirit, not any existing cartoon. Delicate real watercolor washes and brush edges, warm rice-paper ivory and muted sage palette. Single centered character, face clearly readable at small size, plenty of clear space around its silhouette. Square image, solid warm ivory background #fbf8f1. No text, letters, logos, scenery, frame or watermark.
+
+## Subsequent annotation pass
+
+The card's heading/tagline, visible index label, category metadata and secondary tabs were removed. The select is centered. Review buttons retain only their symbols with accessible names/tooltips. Strokes plays directly over the illustrated character, with a static Kai glyph restored afterward; writing and questions remain available in the Practice writing dialog.
