@@ -1,6 +1,6 @@
 # InkTales
 
-English-first Chinese-character learning, inspired by traditional watercolor landscapes and rice paper. The app opens on the full-page framed flashcard and includes a home page, 12-character explorer, learning path, local progress, bookmarks, sourced historical forms with hover highlights, animated stroke playback, stroke tracing, quizzes, contextual and standalone learning companions.
+English-first Chinese-character learning, inspired by traditional watercolor landscapes and rice paper. The app opens on the full-page framed flashcard and includes a home page, 12-character explorer, learning path, local progress, bookmarks, sourced historical forms with hover highlights, animated stroke playback, contextual and standalone learning companions.
 
 ## Run
 
@@ -20,7 +20,7 @@ npm run build
 
 ## Course and imagery
 
-`lib/lessons.ts` contains 12 original lessons. All stories are explicitly labeled mnemonics. No unreviewed historical forms or etymological claims are presented as fact. Stroke data and Hanzi Writer are bundled under `public/data` and `public/vendor`, including licenses. Twelve focused watercolor illustrations live in `public/assets/characters`. Two earlier landscape paintings remain for the home and companion pages. The sourced historical forms and public-domain/CC0 metadata are bundled under `public/evolution` and `lib/evolution-data.json`. The supplied UI reference informed the design and is not distributed.
+`lib/lessons.ts` contains 12 original lessons. All stories are explicitly labeled mnemonics. No unreviewed historical forms or etymological claims are presented as fact. Stroke data and Hanzi Writer are bundled under `public/data` and `public/vendor`, including licenses. Twelve focused watercolor illustrations live in `public/assets/characters`. The welcome page uses an owner-supplied landscape image and previews sign-in and sign-up; accounts are not connected, and visitors can enter lessons without one. The sourced historical forms and public-domain/CC0 metadata are bundled under `public/evolution` and `lib/evolution-data.json`. The supplied UI reference informed the design and is not distributed.
 
 ## Optional real AI
 
