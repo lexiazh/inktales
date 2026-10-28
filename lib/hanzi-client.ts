@@ -1,4 +1,4 @@
-export type Writer={animateCharacter:()=>Promise<void>;quiz:(options:Record<string,unknown>)=>void;cancelQuiz:()=>void;pauseAnimation:()=>void};
+export type Writer={animateCharacter:()=>Promise<void>;quiz:(options:Record<string,unknown>)=>void;cancelQuiz:()=>void;pauseAnimation:()=>void;hideCharacter:(options?:{duration:number})=>Promise<void>;updateDimensions:(options:{width:number;height:number;padding:number})=>void};
 declare global {interface Window {HanziWriter?: {create:(element:HTMLElement,char:string,options:Record<string,unknown>)=>Writer}}}
 let libraryPromise:Promise<void>|undefined;
 
