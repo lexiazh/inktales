@@ -1,75 +1,77 @@
 'use client';
-import {useEffect,useRef,useState} from 'react';
-import {LoaderCircle,PenLine,Play,Volume2} from 'lucide-react';
+import {useEffect,useId,useRef,useState,type PointerEvent} from 'react';
+import {Check,LoaderCircle,Pencil,Play,RotateCcw,Volume2} from 'lucide-react';
 import type {Lesson} from '@/lib/lessons';
-import {loadHanziWriter,type Writer} from '@/lib/hanzi-client';
+import {characterStrokes} from '@/lib/character-strokes';
 
-export function CharacterIllustration({lesson,speaking,onListen,onError}:{lesson:Lesson;speaking:boolean;onListen:()=>void;onError:(message:string)=>void}){
- const target=useRef<HTMLDivElement>(null),writer=useRef<Writer|null>(null);
- const [ready,setReady]=useState(false),[mode,setMode]=useState<'idle'|'playing'|'tracing'>('idle');
+export function CharacterIllustration({lesson,speaking,onListen}:{lesson:Lesson;speaking:boolean;onListen:()=>void;onError:(message:string)=>void}){
+ const strokes=characterStrokes[lesson.char];
+ const id='ink-'+useId().replace(/[^a-zA-Z0-9_-]/g,'');
+ const lines=useRef<(SVGPolylineElement|null)[]>([]),ink=useRef<(SVGPathElement|null)[]>([]),animation=useRef<number|null>(null),busy=useRef(false);
+ const [playing,setPlaying]=useState(false);
+ const [tracing,setTracing]=useState(false),[tracePaths,setTracePaths]=useState<string[]>([]);
+ const drawing=useRef<number|null>(null);
+ useEffect(()=>()=>{if(animation.current!==null)cancelAnimationFrame(animation.current);},[]);
 
- useEffect(()=>{
-  let active=true;
-  const element=target.current;
-  if(!element)return;
-  const size=()=>element.getBoundingClientRect().width||160;
-  let observer:ResizeObserver|undefined;
-  loadHanziWriter().then(()=>{
-   if(!active||!window.HanziWriter)return;
-   const width=size();
-   writer.current=window.HanziWriter.create(element,lesson.char,{
-    width,height:width,padding:0,showCharacter:false,showOutline:false,
-    strokeColor:'rgba(255, 0, 0, 0.7)',drawingColor:'rgba(255, 0, 0, 0.7)',highlightColor:'rgba(255, 0, 0, 0.7)',highlightOnComplete:false,
-    strokeAnimationSpeed:1.5,delayBetweenStrokes:200,
-    charDataLoader:(char:string,done:(data:unknown)=>void,fail:(error:unknown)=>void)=>{
-     fetch('/data/'+encodeURIComponent(char)+'.json').then(response=>{
-      if(!response.ok)throw new Error('Character data unavailable');
-      return response.json();
-     }).then(done).catch(fail);
-    },
-    onLoadCharDataSuccess:()=>{if(active)setReady(true);},
-    onLoadCharDataError:()=>{if(active)onError('This character could not load. Try again later.');},
-   });
-   observer=new ResizeObserver(()=>{const width=size();writer.current?.updateDimensions({width,height:width,padding:0});});
-   observer.observe(element);
-  }).catch(()=>{if(active)onError('Writing tools could not load. Try again later.');});
-  return()=>{active=false;observer?.disconnect();writer.current?.cancelQuiz();writer.current?.pauseAnimation();writer.current=null;element.replaceChildren();};
- },[lesson.char,onError]);
-
- const play=async()=>{
-  if(!writer.current||mode==='playing')return;
-  const current=writer.current;
-  current.cancelQuiz();setMode('playing');
-  try{
-   await current.hideCharacter({duration:0});
-   await current.animateCharacter();
-   await current.hideCharacter({duration:0});
-  }catch{if(writer.current===current)onError('Stroke playback could not finish. Try again.');
-  }finally{if(writer.current===current)setMode('idle');}
+ const tracePoint=(event:PointerEvent<SVGSVGElement>)=>{
+  const matrix=event.currentTarget.getScreenCTM();
+  if(!matrix)return null;
+  const point=new DOMPoint(event.clientX,event.clientY).matrixTransform(matrix.inverse());
+  return `${Math.round(Math.max(0,Math.min(1024,point.x)))} ${Math.round(Math.max(0,Math.min(1024,point.y)))}`;
  };
- const trace=async()=>{
-  if(!writer.current||mode==='playing')return;
-  const current=writer.current;
-  current.cancelQuiz();setMode('tracing');
-  try{
-   await current.hideCharacter({duration:0});
-   if(writer.current!==current)return;
-   current.quiz({onComplete:async()=>{
-    if(writer.current!==current)return;
-    await current.hideCharacter({duration:0});
-    if(writer.current===current)setMode('idle');
-   }});
-  }catch{if(writer.current===current){setMode('idle');onError('Tracing could not start. Try again.');}}
+ const startTrace=(event:PointerEvent<SVGSVGElement>)=>{
+  if(!tracing||drawing.current!==null||event.button!==0)return;
+  const point=tracePoint(event);if(!point)return;
+  event.preventDefault();event.currentTarget.setPointerCapture(event.pointerId);
+  drawing.current=event.pointerId;
+  setTracePaths(paths=>[...paths,`M ${point} L ${point}`]);
+ };
+ const moveTrace=(event:PointerEvent<SVGSVGElement>)=>{
+  if(drawing.current!==event.pointerId)return;
+  const point=tracePoint(event);if(!point)return;
+  setTracePaths(paths=>[...paths.slice(0,-1),`${paths[paths.length-1]} L ${point}`]);
+ };
+ const endTrace=(event:PointerEvent<SVGSVGElement>)=>{
+  if(drawing.current!==event.pointerId)return;
+  drawing.current=null;
+  if(event.currentTarget.hasPointerCapture(event.pointerId))event.currentTarget.releasePointerCapture(event.pointerId);
+ };
+
+ const play=()=>{
+  if(busy.current)return;
+  busy.current=true;setPlaying(true);
+  strokes.forEach(({length,radius},index)=>{
+   lines.current[index]?.setAttribute('stroke-dashoffset',String(length+radius*3));
+   ink.current[index]?.classList.remove('is-current');
+  });
+  const start=performance.now(),strokeMs=720,gapMs=180;
+  const tick=(now:number)=>{
+   const elapsed=now-start;
+   strokes.forEach(({length,radius},index)=>{
+    const progress=Math.max(0,Math.min(1,(elapsed-index*(strokeMs+gapMs))/strokeMs));
+    lines.current[index]?.setAttribute('stroke-dashoffset',String(length*(1-progress)+radius*3));
+    ink.current[index]?.classList.toggle('is-current',progress>0&&progress<1);
+   });
+   if(elapsed<(strokes.length-1)*(strokeMs+gapMs)+strokeMs)animation.current=requestAnimationFrame(tick);
+   else{animation.current=null;busy.current=false;setPlaying(false);}
+  };
+  animation.current=requestAnimationFrame(tick);
  };
 
  return <>
   <div className="character-visual">
    <figure className="character-art"><img src={'/assets/characters/'+lesson.id+'.webp'} alt={lesson.imageAlt} fetchPriority="high"/></figure>
-   <div className={'character-hanzi animated-hanzi '+(mode==='tracing'?'is-tracing':'')} lang="zh-CN" aria-label={lesson.char}>
-    <span className="hanzi-fallback" aria-hidden="true">{lesson.char}</span>
-    <div ref={target} className="hanzi-writer" aria-hidden="true"/>
+   <div className={'character-hanzi animated-hanzi'+(playing?' is-playing':'')+(tracing?' is-tracing':'')} lang="zh-CN" aria-label={lesson.char}>
+    <svg className="regular-hanzi" viewBox="0 0 1024 1024" aria-label={tracing?`Draw over ${lesson.char}`:undefined} aria-hidden={!tracing} onPointerDown={startTrace} onPointerMove={moveTrace} onPointerUp={endTrace} onPointerCancel={endTrace}>
+     <defs>{strokes.map(({median,length,radius},index)=><mask key={index} id={`${id}-${index}`} maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="-500" y="-600" width="2100" height="2100"><polyline ref={element=>{lines.current[index]=element;}} points={median.map(point=>point.join(',')).join(' ')} fill="none" stroke="#fff" strokeWidth={radius*2} strokeLinecap="round" strokeLinejoin="round" strokeDasharray={length+radius*2} strokeDashoffset={length+radius*3}/></mask>)}</defs>
+     <g transform="translate(0 900) scale(1 -1)">
+      {strokes.map(({path},index)=><path key={'base-'+index} className="stroke-base" d={path}/>)}
+      {strokes.map(({path},index)=><path key={'ink-'+index} ref={element=>{ink.current[index]=element;}} className="stroke-ink" d={path} mask={`url(#${id}-${index})`}/>)}
+     </g>
+     {tracing&&<><rect className="trace-hit-area" width="1024" height="1024" fill="transparent"/>{tracePaths.map((path,index)=><path key={index} className="trace-line" d={path}/>)}</>}
+    </svg>
    </div>
   </div>
-  <div className="character-center"><div className="pinyin">{lesson.pinyin}</div><div className="character-tools"><button onClick={onListen} className={'pronunciation-button '+(speaking?'speaking':'')} aria-label={'Hear '+lesson.pinyin}><Volume2 size={24} strokeWidth={1.6}/><span>Listen</span></button><button onClick={play} disabled={!ready||mode==='playing'} className="pronunciation-button" aria-label="Play strokes on the character" aria-busy={mode==='playing'} title="Play stroke order on the character">{mode==='playing'?<LoaderCircle className="spin" size={24}/>:<Play size={24} strokeWidth={1.6}/>}<span>Strokes</span></button><button onClick={trace} disabled={!ready||mode==='playing'} className="pronunciation-button" aria-label={mode==='tracing'?'Start tracing again':'Trace the character'} title="Trace the character with a finger or mouse"><PenLine size={24} strokeWidth={1.6}/><span>{mode==='tracing'?'Again':'Trace'}</span></button></div><span className="sr-only" role="status">{mode==='playing'?'Playing stroke order for '+lesson.char:mode==='tracing'?'Trace '+lesson.char+' on the character':''}</span></div>
+  <div className="character-center"><div className="pinyin">{lesson.pinyin}</div><div className="character-tools"><button onClick={onListen} className={'pronunciation-button '+(speaking?'speaking':'')} aria-label={'Hear '+lesson.pinyin}><Volume2 size={24} strokeWidth={1.6}/><span>Listen</span></button>{tracing?<><button onClick={()=>setTracePaths([])} className="pronunciation-button" aria-label="Clear tracing"><RotateCcw size={24} strokeWidth={1.6}/><span>Clear</span></button><button onClick={()=>{drawing.current=null;setTracePaths([]);setTracing(false);}} className="pronunciation-button" aria-label="Finish tracing"><Check size={24} strokeWidth={1.6}/><span>Done</span></button></>:<><button onClick={play} disabled={playing} className="pronunciation-button" aria-label="Play strokes on the character" aria-busy={playing} title="Trace strokes on the character">{playing?<LoaderCircle className="spin" size={24}/>:<Play size={24} strokeWidth={1.6}/>}<span>Strokes</span></button><button onClick={()=>{setTracePaths([]);setTracing(true);}} disabled={playing} className="pronunciation-button" aria-label="Trace the character" title="Draw over the character with your finger or mouse"><Pencil size={24} strokeWidth={1.6}/><span>Trace</span></button></>}</div><span className="sr-only" role="status">{playing?'Tracing stroke order for '+lesson.char:tracing?'Trace mode: draw over '+lesson.char:''}</span></div>
  </>;
 }
