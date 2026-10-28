@@ -391,6 +391,12 @@ body{font-size:16px}
 .stroke-ink{fill:#1f4942;visibility:hidden}
 .animated-hanzi.is-playing .stroke-ink{visibility:visible}
 .stroke-ink.is-current{fill:#c24234}
+.animated-hanzi.is-tracing .stroke-base{fill:#a8aa98}
+.animated-hanzi.is-tracing .regular-hanzi{touch-action:none;cursor:crosshair}
+.trace-hit-area{pointer-events:all}
+.trace-line{fill:none;stroke:#c24234;stroke-width:28;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.character-tools .pronunciation-button:disabled{opacity:.55;cursor:wait}
+@media(max-width:760px){.animated-hanzi.is-tracing{font-size:min(120px,34vw)}}
 .writing-dialog{width:550px;max-height:calc(100dvh - 28px);padding:24px 28px;overflow:auto}
 .writing-dialog .dialog-heading{gap:12px}.writing-dialog .dialog-heading h2{font-size:31px;margin:0;line-height:1.2}
 .writing-dialog .dialog-heading h2>span{margin-left:8px}
