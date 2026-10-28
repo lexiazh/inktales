@@ -1,2 +1,2 @@
-import InkTales from '@/components/inktales';
-export default function Page() { return <InkTales />; }
+import AppEntry from '@/components/app-entry';
+export default function Page() { return <AppEntry />; }

@@ -1,8 +1,9 @@
 'use client';
 
 import {useState,useEffect,useRef,useCallback} from 'react';
-import {ArrowRight,Bookmark,BookOpen,Check,ChevronDown,Grid2X2,Home,Leaf,Maximize2,MessageCircle,RotateCcw,Search,Send,Settings2,Sparkles,Volume2,X,Route,Info,LoaderCircle} from 'lucide-react';
+import {ArrowRight,Bookmark,BookOpen,Check,ChevronDown,Grid2X2,Home,Leaf,LogOut,Maximize2,MessageCircle,Search,Send,Sparkles,Volume2,X,Route,Info,LoaderCircle} from 'lucide-react';
 import {lessons,staticAnswer,type Lesson,type Progress} from '@/lib/lessons';
+import {supabase} from '@/lib/supabase';
 import evolutionData from '@/lib/evolution-data.json';
 import {recordCompletion,recordAgain} from '@/lib/progress';
 import {JourneyDashboard} from './journey-dashboard';
@@ -15,39 +16,34 @@ const STORAGE='inktales-progress-v1';
 function loadObject<T,>(key:string,fallback:T):T {try {const raw=localStorage.getItem(key);return raw?JSON.parse(raw):fallback;}catch{return fallback;}}
 function CornerMarks(){return <><i className="corner tl"/><i className="corner tr"/><i className="corner bl"/><i className="corner br"/></>}
 
-export default function InkTales(){
+export default function InkTales({username=''}:{username?:string}){
  const [view,setView]=useState<View>('learn');
  const [index,setIndex]=useState(0);
  const [progress,setProgress]=useState<Progress>({});
  const [bookmarks,setBookmarks]=useState<string[]>([]);
  const [toast,setToast]=useState('');
  const [loaded,setLoaded]=useState(false);
- const [sound,setSound]=useState(true);
- const [calm,setCalm]=useState(false);
- const [resetConfirm,setResetConfirm]=useState(false);
  const [filter,setFilter]=useState('All characters');
  const [query,setQuery]=useState('');
  const [drawerOpen,setDrawerOpen]=useState(false);
  const [speaking,setSpeaking]=useState(false);
  const [chatSession,setChatSession]=useState(0);
- const settings=useRef<HTMLDialogElement>(null);
  const drawer=useRef<HTMLDialogElement>(null);
  const toastTimer=useRef<ReturnType<typeof setTimeout>|null>(null);
  const lesson=lessons[index];
  const learned=Object.values(progress).filter(p=>p?.learned).length;
  const notify=useCallback((message:string)=>{setToast(message);if(toastTimer.current)clearTimeout(toastTimer.current);toastTimer.current=setTimeout(()=>setToast(''),4300);},[]);
+ const signOut=async()=>{const {error}=await supabase.auth.signOut();if(error)notify('Unable to sign out. Please try again.');};
  useEffect(()=>{
   if('speechSynthesis' in window)window.speechSynthesis.getVoices();
   const saved=loadObject<Progress>(STORAGE,{});
   setProgress(saved&&typeof saved==='object'&&!Array.isArray(saved)?saved:{});
   const marks=loadObject<string[]>('inktales-bookmarks',[]);setBookmarks(Array.isArray(marks)?marks:[]);
-  const prefs=loadObject<{sound:boolean;calm:boolean}>('inktales-settings',{sound:true,calm:false});setSound(prefs.sound);setCalm(prefs.calm);
   const parse=()=>{const [route,id]=location.hash.slice(1).split('/');if(['learn','explore','journey','assistant','home'].includes(route))setView(route as View);if(id){const n=lessons.findIndex(l=>l.id===id);if(n>=0)setIndex(n);}};
   parse();window.addEventListener('hashchange',parse);setLoaded(true);return()=>window.removeEventListener('hashchange',parse);
  },[]);
  useEffect(()=>{if(!loaded)return;try{localStorage.setItem(STORAGE,JSON.stringify(progress));}catch{notify('Your browser could not save progress. You can keep learning in this session.');}},[progress,loaded,notify]);
  useEffect(()=>{if(!loaded)return;try{localStorage.setItem('inktales-bookmarks',JSON.stringify(bookmarks));}catch{}},[bookmarks,loaded]);
- useEffect(()=>{if(!loaded)return;try{localStorage.setItem('inktales-settings',JSON.stringify({sound,calm}));}catch{}document.documentElement.classList.toggle('calm',calm);},[sound,calm,loaded]);
  useEffect(()=>{if('speechSynthesis'in window)window.speechSynthesis.cancel();setSpeaking(false);},[index]);
  const navigate=useCallback((v:View,id?:string)=>{location.hash=v+(id?'/'+id:'');setView(v);if(id){const n=lessons.findIndex(l=>l.id===id);if(n>=0)setIndex(n);}window.scrollTo({top:0,behavior:'instant'});},[]);
  const selectLesson=useCallback((n:number)=>{if(n<0||n>=lessons.length)return;navigate('learn',lessons[n].id);},[navigate]);
@@ -56,11 +52,10 @@ export default function InkTales(){
   notify(remembered?`${lesson.char} remembered. Your progress is saved.`:`${lesson.char} is ready to revisit in My journey.`);
   if(index<lessons.length-1)selectLesson(index+1);else navigate('journey');
  };
- useEffect(()=>{const onKey=(e:KeyboardEvent)=>{const el=e.target as HTMLElement;if(['INPUT','TEXTAREA','SELECT','BUTTON'].includes(el.tagName)||el.isContentEditable||settings.current?.open||drawer.current?.open||view!=='learn')return;
+ useEffect(()=>{const onKey=(e:KeyboardEvent)=>{const el=e.target as HTMLElement;if(['INPUT','TEXTAREA','SELECT','BUTTON'].includes(el.tagName)||el.isContentEditable||drawer.current?.open||view!=='learn')return;
   if(e.key==='ArrowRight'){e.preventDefault();selectLesson(index+1);}if(e.key==='ArrowLeft'){e.preventDefault();selectLesson(index-1);}
  };window.addEventListener('keydown',onKey);return()=>window.removeEventListener('keydown',onKey);},[view,index,selectLesson]);
  const speak=()=>{
-  if(!sound){notify('Pronunciation is turned off. Enable it in settings.');return;}
   if(!('speechSynthesis'in window)){notify('Mandarin audio is unavailable in this browser. Pinyin: '+lesson.pinyin);return;}
   const voices=window.speechSynthesis.getVoices();const voice=voices.find(v=>/zh[-_]CN/i.test(v.lang))||voices.find(v=>/^zh/i.test(v.lang));
   if(!voice){notify('No Mandarin voice is available on this device. Read the pinyin: '+lesson.pinyin);return;}
@@ -75,8 +70,7 @@ export default function InkTales(){
   <header className="site-header">
    <a className="brand" href="#home" onClick={()=>navigate('home')} aria-label="InkTales home"><span className="seal">墨</span><span>Ink<span className="brand-light">Tales</span><small>STORIES BEHIND THE STROKES</small></span></a>
    <nav aria-label="Main navigation">{([{id:'home',label:'Home',icon:Home},{id:'learn',label:'Flashcards',icon:BookOpen},{id:'explore',label:'Characters',icon:Grid2X2},{id:'journey',label:'My journey',icon:Route},{id:'assistant',label:'Momo 墨墨',icon:Sparkles}] as const).map(n=><a key={n.id} className={view===n.id?'nav-link active':'nav-link'} aria-current={view===n.id?'page':undefined} href={'#'+n.id} onClick={()=>navigate(n.id)}><n.icon size={26} strokeWidth={1.65}/><span>{n.label}{n.id==='assistant'&&<small>AI companion</small>}</span></a>)}</nav>
-   <div className="sidebar-progress"><div className="sidebar-progress-label"><Leaf size={18}/><span>{learned} of 12 learned</span></div><div className="sidebar-progress-track"><span style={{width:learned/12*100+'%'}}/></div><button className="text-button" onClick={()=>navigate('journey')}>View your journey<ArrowRight size={16}/></button></div>
-   <div className="header-right"><button className="settings-link" onClick={()=>settings.current?.showModal()}><Settings2 size={23}/><span>Settings</span></button><a className="sidebar-credits" href="/credits" target="_blank" rel="noreferrer">Sources & credits<ArrowUpRightIcon/></a></div>
+   <button className="sidebar-signout" onClick={signOut}><LogOut size={18}/><span>Sign out</span></button>
   </header>
   <main id="main" className={'main-content view-'+view}>
    {view==='learn'&&<section className="flashcard-frame" aria-label={'Flashcard: '+lesson.char+', '+lesson.meaning}>
@@ -95,16 +89,15 @@ export default function InkTales(){
     </div>
     <div className="flashcard-footer"><button className="ask-inline" onClick={openHelper}><Sparkles size={24}/><span>Ask Momo <span lang="zh-CN">墨墨</span></span></button><div className="review-actions" aria-label="How well do you remember this character?"><button className="review-again" onClick={()=>reviewCard(false)} aria-label="Again — revisit this character" title="Again — revisit this character"><X size={30}/></button><button className="review-remember" onClick={()=>reviewCard(true)} aria-label="Got it — remember and continue" title="Got it — remember and continue"><Check size={31}/></button></div><button className="icon-button expand-button" aria-label="Expand to full screen" onClick={fullScreen}><Maximize2 size={23}/></button></div>
    </section>}
-   {view==='home'&&<HomeDashboard progress={progress} bookmarks={bookmarks} onContinue={selectLesson} onExplore={selectLesson}/>}
+   {view==='home'&&<HomeDashboard username={username} progress={progress} bookmarks={bookmarks} onContinue={selectLesson} onExplore={selectLesson}/>}
    {view==='explore'&&<>
-    <div className="explorer-toolbar"><div className="filter-buttons" aria-label="Filter characters">{['All characters','Nature','People & life'].map(f=><button key={f} className={filter===f?'selected':''} aria-pressed={filter===f} onClick={()=>setFilter(f)}>{f}</button>)}</div><label className="search-input"><Search size={17}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Character, pinyin, or meaning" aria-label="Search characters"/>{query&&<button aria-label="Clear search" onClick={()=>setQuery('')}><X size={14}/></button>}</label></div>
+    <div className="explorer-toolbar"><div className="filter-buttons" aria-label="Filter characters">{['All characters','Nature','People & life','Food & Drink','Places & Transport'].map(f=><button key={f} className={filter===f?'selected':''} aria-pressed={filter===f} onClick={()=>setFilter(f)}>{f}</button>)}</div><label className="search-input"><Search size={17}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Character, pinyin, or meaning" aria-label="Search characters"/>{query&&<button aria-label="Clear search" onClick={()=>setQuery('')}><X size={14}/></button>}</label></div>
     <div className="character-grid">{visibleLessons.map(l=><button className={'explore-card '+l.tint} key={l.id} onClick={()=>selectLesson(lessons.indexOf(l))}><div className="explore-art"><img src={'/assets/characters/'+l.id+'.webp'} alt=""/><span className="explore-lettering"><span lang="zh-CN">{l.char}</span><span className="explore-pinyin">{l.pinyin}</span></span></div><div className="explore-caption"><strong>{l.meaning}</strong><ArrowRight size={19}/></div></button>)}</div>
     {!visibleLessons.length&&<div className="empty-state"><Search size={30}/><h2>No characters found, just yet.</h2><p>Try another meaning or pinyin, or explore the whole collection.</p><button className="text-button" onClick={()=>{setFilter('All characters');setQuery('');}}>Show all characters<ArrowRight size={16}/></button></div>}
    </>}
    {view==='journey'&&<JourneyDashboard progress={progress} bookmarks={bookmarks} onSelect={id=>selectLesson(lessons.findIndex(l=>l.id===id))} onCollection={f=>{setFilter(f);setQuery('');navigate('explore');}}/>}
    {view==='assistant'&&<section className="momo-page"><div className="momo-page-heading"><div className="momo-identity"><img src="/assets/momo.webp" alt="Momo, a smiling watercolor ink companion"/><div><h1>Momo <span lang="zh-CN">墨墨</span></h1><p>Your Chinese learning companion</p></div></div><button className="secondary-button" aria-label="New chat" title="Start a new chat" onClick={()=>setChatSession(n=>n+1)}><MessageCircle size={23}/>New chat</button></div><div className="momo-lesson-picker"><label htmlFor="momo-lesson">Learning today</label><div><select id="momo-lesson" value={index} onChange={e=>setIndex(Number(e.target.value))}>{lessons.map((l,n)=><option key={l.id} value={n}>{l.char} · {l.pinyin} · {l.meaning}</option>)}</select><ChevronDown size={20}/></div><button className="text-button" onClick={()=>selectLesson(index)}><BookOpen size={19}/>Open flashcard</button></div><AssistantChat key={lesson.id+'-'+chatSession} lesson={lesson}/></section>}
   </main>
-  <dialog className="settings-dialog paper-dialog" aria-label="Learning settings" ref={settings} onClose={()=>setResetConfirm(false)}><div className="dialog-heading"><span className="eyebrow">MAKE YOURSELF AT HOME</span><button className="icon-button" aria-label="Close settings" onClick={()=>settings.current?.close()}><X size={20}/></button></div><h2>A space for your pace.</h2><p className="dialog-intro">A few little comforts for your learning ritual.</p><label className="preference-row"><span><strong>Pronunciation audio</strong><small>Use your device’s Mandarin voice.</small></span><input type="checkbox" checked={sound} onChange={e=>setSound(e.target.checked)}/></label><label className="preference-row"><span><strong>A calmer experience</strong><small>Reduce decorative motion and transitions.</small></span><input type="checkbox" checked={calm} onChange={e=>setCalm(e.target.checked)}/></label><div className="settings-storage"><Leaf size={18}/><p>Progress and saved characters stay in this browser. No account or personal details needed.</p></div><div className="reset-area">{resetConfirm?<><p>Reset all learning progress on this device? Saved characters will stay.</p><button className="danger-button" onClick={()=>{setProgress({});setResetConfirm(false);notify('A fresh page. Your learning progress has been reset.');settings.current?.close();}}>Yes, start fresh</button><button className="text-button" onClick={()=>setResetConfirm(false)}>Keep my progress</button></>:<button className="text-button reset-button" onClick={()=>setResetConfirm(true)}><RotateCcw size={14}/>Reset learning progress</button>}</div><a className="credits-link" href="/credits" target="_blank" rel="noreferrer">Credits, content & privacy<ArrowUpRightIcon/></a></dialog>
   <dialog className="assistant-drawer" aria-label="Momo 墨墨 learning companion" ref={drawer} onClose={()=>setDrawerOpen(false)}><div className="drawer-heading"><div><Sparkles size={20}/><span>Momo <span lang="zh-CN">墨墨</span><small>Your Chinese learning companion</small></span></div><button className="icon-button" aria-label="Close Momo" onClick={()=>drawer.current?.close()}><X size={20}/></button></div>{drawerOpen&&<AssistantChat key={lesson.id} lesson={lesson} compact/>}</dialog>
   <div className={'toast '+(toast?'visible':'')} role="status" aria-live="polite"><Leaf size={17}/>{toast}</div>
  </div>;
