@@ -386,8 +386,11 @@ body{font-size:16px}
 .review-actions{gap:28px}
 .animated-hanzi{display:grid;place-items:center;width:1em;height:1em;flex-shrink:0;text-shadow:none}
 .regular-hanzi{display:block;width:100%;height:100%;overflow:visible}
-.hanzi-base{fill:#1f4942}
-.hanzi-trace{fill:#c24234}
+.stroke-base{fill:#1f4942}
+.animated-hanzi.is-playing .stroke-base{fill:#dfd8c9}
+.stroke-ink{fill:#1f4942;visibility:hidden}
+.animated-hanzi.is-playing .stroke-ink{visibility:visible}
+.stroke-ink.is-current{fill:#c24234}
 .writing-dialog{width:550px;max-height:calc(100dvh - 28px);padding:24px 28px;overflow:auto}
 .writing-dialog .dialog-heading{gap:12px}.writing-dialog .dialog-heading h2{font-size:31px;margin:0;line-height:1.2}
 .writing-dialog .dialog-heading h2>span{margin-left:8px}

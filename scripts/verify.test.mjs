@@ -17,6 +17,20 @@ test('12 unique complete lessons have a correct meaning choice and bundled strok
  assert.equal(lessons.length,12);assert.equal(new Set(lessons.map(l=>l.id)).size,12);
  for(const l of lessons){assert.equal(l.choices.filter(c=>c===l.meaning).length,1);assert.ok(l.story.length>80);assert.ok(l.pinyin);const d=JSON.parse(await readFile(`public/data/${l.char}.json`,'utf8'));assert.equal(d.strokes.length,l.strokes);assert.equal(d.medians.length,l.strokes);}
 });
+test('every flashcard stroke has a usable tracing mask',async()=>{
+ const bundle=await build({entryPoints:['lib/character-strokes.ts'],bundle:true,platform:'node',format:'esm',write:false});
+ const {characterStrokes}=await import('data:text/javascript;base64,'+Buffer.from(bundle.outputFiles[0].text).toString('base64'));
+ for(const lesson of lessons){
+  const strokes=characterStrokes[lesson.char];
+  assert.equal(strokes?.length,lesson.strokes,lesson.char);
+  for(const stroke of strokes){
+   assert.ok(stroke.path.startsWith('M '),lesson.char);
+   assert.ok(stroke.median.length>1,lesson.char);
+   assert.ok(Number.isFinite(stroke.length)&&stroke.length>0,lesson.char);
+   assert.ok(Number.isFinite(stroke.radius)&&stroke.radius>5,lesson.char);
+  }
+ }
+});
 test('all essential local assets and licenses are present',async()=>{for(const p of ['assets/mountain.webp','assets/grove.webp','assets/brush.css','assets/cormorant.css','assets/dm-sans.css','assets/Cormorant-Garamond-OFL.txt','assets/DM-Sans-OFL.txt','assets/Ma-Shan-Zheng-OFL.txt','vendor/hanzi-writer.min.js','vendor/HANZI-WRITER-LICENSE.txt','data/ARPHICPL.TXT'])assert.ok((await readFile('public/'+p)).length>50,p);});
 test('unconfigured API reports offline without disclosing configuration',async()=>{const r=api.GET();assert.deepEqual(await r.json(),{configured:false});});
 test('offline meaning answer matches the lesson and is labeled as offline',async()=>{const r=await api.POST(request(valid));assert.equal(r.status,200);const d=await r.json();assert.equal(d.offline,true);assert.match(d.answer,/mountain/);assert.match(d.answer,/memory aid/);});
