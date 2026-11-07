@@ -21,9 +21,9 @@ function distance(point:Point,start:Point,end:Point){
  return Math.hypot(point[0]-start[0]-t*dx,point[1]-start[1]-t*dy);
 }
 
-// Match the installed hanzi-stroke-video skill's median mask coverage.
-export const characterStrokes=Object.fromEntries(Object.entries(sources).map(([char,data])=>[
- char,data.strokes.map((path,index)=>{
+// Median masks keep the stroke animation aligned with the displayed glyph.
+export function prepareStrokes(data:StrokeData){
+ return data.strokes.map((path,index)=>{
   const median=data.medians[index];
   const numbers=(path.match(/-?\d+(?:\.\d+)?/g)??[]).map(Number);
   let coverage=0,length=0;
@@ -35,5 +35,21 @@ export const characterStrokes=Object.fromEntries(Object.entries(sources).map(([c
   }
   for(let j=1;j<median.length;j++)length+=Math.hypot(median[j][0]-median[j-1][0],median[j][1]-median[j-1][1]);
   return {path,median,length,radius:coverage+5};
- })
-])) as Record<string,{path:string;median:Point[];length:number;radius:number}[]>;
+ });
+}
+export type PreparedStroke=ReturnType<typeof prepareStrokes>[number];
+export const characterStrokes:Record<string,PreparedStroke[]>=Object.fromEntries(Object.entries(sources).map(([char,data])=>[char,prepareStrokes(data)]));
+const pending=new Map<string,Promise<PreparedStroke[]>>();
+
+// Keep the expanded course out of the initial JavaScript bundle.
+export function loadCharacterStrokes(char:string):Promise<PreparedStroke[]>{
+ if(characterStrokes[char])return Promise.resolve(characterStrokes[char]);
+ const existing=pending.get(char);if(existing)return existing;
+ const request=fetch(`/data/${encodeURIComponent(char)}.json`).then(async response=>{
+  if(!response.ok)throw new Error('Writing data unavailable');
+  const data=await response.json() as StrokeData;
+  if(!data.strokes?.length||data.strokes.length!==data.medians?.length)throw new Error('Invalid writing data');
+  const strokes=prepareStrokes(data);characterStrokes[char]=strokes;return strokes;
+ }).finally(()=>pending.delete(char));
+ pending.set(char,request);return request;
+}

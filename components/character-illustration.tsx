@@ -1,11 +1,14 @@
 'use client';
 import {useEffect,useId,useRef,useState,type PointerEvent} from 'react';
 import {Check,LoaderCircle,Pencil,Play,RotateCcw,Volume2} from 'lucide-react';
-import type {Lesson} from '@/lib/lessons';
-import {characterStrokes} from '@/lib/character-strokes';
+import {pronunciationText,lessonArtwork,type Lesson} from '@/lib/lessons';
+import {characterStrokes,loadCharacterStrokes,type PreparedStroke} from '@/lib/character-strokes';
 
 export function CharacterIllustration({lesson,speaking,onListen}:{lesson:Lesson;speaking:boolean;onListen:()=>void;onError:(message:string)=>void}){
- const strokes=characterStrokes[lesson.char];
+ const [strokes,setStrokes]=useState<PreparedStroke[]>(characterStrokes[lesson.char]||[]);
+ const [loadError,setLoadError]=useState(false);
+ const [loadAttempt,setLoadAttempt]=useState(0);
+ useEffect(()=>{let active=true;setLoadError(false);loadCharacterStrokes(lesson.char).then(data=>{if(active)setStrokes(data);}).catch(()=>{if(active)setLoadError(true);});return()=>{active=false;};},[lesson.char,loadAttempt]);
  const id='ink-'+useId().replace(/[^a-zA-Z0-9_-]/g,'');
  const lines=useRef<(SVGPolylineElement|null)[]>([]),ink=useRef<(SVGPathElement|null)[]>([]),animation=useRef<number|null>(null),busy=useRef(false);
  const [playing,setPlaying]=useState(false);
@@ -38,7 +41,7 @@ export function CharacterIllustration({lesson,speaking,onListen}:{lesson:Lesson;
  };
 
  const play=()=>{
-  if(busy.current)return;
+  if(busy.current||!strokes.length)return;
   busy.current=true;setPlaying(true);
   strokes.forEach(({length,radius},index)=>{
    lines.current[index]?.setAttribute('stroke-dashoffset',String(length+radius*3));
@@ -60,7 +63,7 @@ export function CharacterIllustration({lesson,speaking,onListen}:{lesson:Lesson;
 
  return <>
   <div className="character-visual">
-   <figure className="character-art"><img src={'/assets/characters/'+lesson.id+'.webp'} alt={lesson.imageAlt} fetchPriority="high"/></figure>
+   <figure className="character-art"><img src={lessonArtwork(lesson)} alt={lesson.imageAlt} fetchPriority="high"/></figure>
    <div className={'character-hanzi animated-hanzi'+(playing?' is-playing':'')+(tracing?' is-tracing':'')} lang="zh-CN" aria-label={lesson.char}>
     <svg className="regular-hanzi" viewBox="0 0 1024 1024" aria-label={tracing?`Draw over ${lesson.char}`:undefined} aria-hidden={!tracing} onPointerDown={startTrace} onPointerMove={moveTrace} onPointerUp={endTrace} onPointerCancel={endTrace}>
      <defs>{strokes.map(({median,length,radius},index)=><mask key={index} id={`${id}-${index}`} maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="-500" y="-600" width="2100" height="2100"><polyline ref={element=>{lines.current[index]=element;}} points={median.map(point=>point.join(',')).join(' ')} fill="none" stroke="#fff" strokeWidth={radius*2} strokeLinecap="round" strokeLinejoin="round" strokeDasharray={length+radius*2} strokeDashoffset={length+radius*3}/></mask>)}</defs>
@@ -72,6 +75,8 @@ export function CharacterIllustration({lesson,speaking,onListen}:{lesson:Lesson;
     </svg>
    </div>
   </div>
-  <div className="character-center"><div className="pinyin">{lesson.pinyin}</div><div className="character-tools"><button onClick={onListen} className={'pronunciation-button '+(speaking?'speaking':'')} aria-label={'Hear '+lesson.pinyin}><Volume2 size={24} strokeWidth={1.6}/><span>Listen</span></button>{tracing?<><button onClick={()=>setTracePaths([])} className="pronunciation-button" aria-label="Clear tracing"><RotateCcw size={24} strokeWidth={1.6}/><span>Clear</span></button><button onClick={()=>{drawing.current=null;setTracePaths([]);setTracing(false);}} className="pronunciation-button" aria-label="Finish tracing"><Check size={24} strokeWidth={1.6}/><span>Done</span></button></>:<><button onClick={play} disabled={playing} className="pronunciation-button" aria-label="Play strokes on the character" aria-busy={playing} title="Trace strokes on the character">{playing?<LoaderCircle className="spin" size={24}/>:<Play size={24} strokeWidth={1.6}/>}<span>Strokes</span></button><button onClick={()=>{setTracePaths([]);setTracing(true);}} disabled={playing} className="pronunciation-button" aria-label="Trace the character" title="Draw over the character with your finger or mouse"><Pencil size={24} strokeWidth={1.6}/><span>Trace</span></button></>}</div><span className="sr-only" role="status">{playing?'Tracing stroke order for '+lesson.char:tracing?'Trace mode: draw over '+lesson.char:''}</span></div>
+  {loadError&&<p role="status" className="writing-load-note">Writing data could not load. <button className="text-button" onClick={()=>setLoadAttempt(n=>n+1)}>Try again</button></p>}
+  {!strokes.length&&!loadError&&<p role="status" className="writing-load-note">Loading writing data…</p>}
+  <div className="character-center"><div className="pinyin">{lesson.pinyin}</div><div className="character-tools"><button onClick={onListen} className={'pronunciation-button '+(speaking?'speaking':'')} aria-label={'Hear '+lesson.pinyin+(pronunciationText(lesson)!==lesson.char?' in '+pronunciationText(lesson):'')}><Volume2 size={24} strokeWidth={1.6}/><span>Listen</span></button>{tracing?<><button onClick={()=>setTracePaths([])} className="pronunciation-button" aria-label="Clear tracing"><RotateCcw size={24} strokeWidth={1.6}/><span>Clear</span></button><button onClick={()=>{drawing.current=null;setTracePaths([]);setTracing(false);}} className="pronunciation-button" aria-label="Finish tracing"><Check size={24} strokeWidth={1.6}/><span>Done</span></button></>:<><button onClick={play} disabled={playing||!strokes.length} className="pronunciation-button" aria-label="Play strokes on the character" aria-busy={playing} title="Trace strokes on the character">{playing?<LoaderCircle className="spin" size={24}/>:<Play size={24} strokeWidth={1.6}/>}<span>Strokes</span></button><button onClick={()=>{setTracePaths([]);setTracing(true);}} disabled={playing||!strokes.length} className="pronunciation-button" aria-label="Trace the character" title="Draw over the character with your finger or mouse"><Pencil size={24} strokeWidth={1.6}/><span>Trace</span></button></>}</div><span className="sr-only" role="status">{playing?'Tracing stroke order for '+lesson.char:tracing?'Trace mode: draw over '+lesson.char:''}</span></div>
  </>;
 }

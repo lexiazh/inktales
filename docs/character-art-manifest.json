@@ -1,0 +1,2068 @@
+{
+  "天": {
+    "file": "/assets/characters/watercolor/char-5929.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 44858
+  },
+  "地": {
+    "file": "/assets/characters/watercolor/char-5730.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 82174
+  },
+  "土": {
+    "file": "/assets/characters/watercolor/char-571f.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 53106
+  },
+  "石": {
+    "file": "/assets/characters/watercolor/char-77f3.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 56930
+  },
+  "沙": {
+    "file": "/assets/characters/watercolor/char-6c99.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 83464
+  },
+  "云": {
+    "file": "/assets/characters/watercolor/char-4e91.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 28882
+  },
+  "雨": {
+    "file": "/assets/characters/watercolor/char-96e8.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 59386
+  },
+  "雪": {
+    "file": "/assets/characters/watercolor/char-96ea.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 57458
+  },
+  "风": {
+    "file": "/assets/characters/watercolor/char-98ce.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 52710
+  },
+  "电": {
+    "file": "/assets/characters/watercolor/char-7535.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 31884
+  },
+  "气": {
+    "file": "/assets/characters/watercolor/char-6c14-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "air filling the expanding balloon and the act of blowing",
+    "width": 1100,
+    "height": 733,
+    "bytes": 52250
+  },
+  "冰": {
+    "file": "/assets/characters/watercolor/char-51b0-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "solid transparent frozen crystal edges and frosty facets",
+    "width": 1100,
+    "height": 733,
+    "bytes": 73986
+  },
+  "河": {
+    "file": "/assets/characters/watercolor/char-6cb3-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the thin continuous winding channel and its two close banks",
+    "width": 1100,
+    "height": 733,
+    "bytes": 102894
+  },
+  "海": {
+    "file": "/assets/characters/watercolor/char-6d77-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "endless open water and a clear distant sea horizon",
+    "width": 1100,
+    "height": 733,
+    "bytes": 66916
+  },
+  "江": {
+    "file": "/assets/characters/watercolor/char-6c5f-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "great width and long directional flow, clearly larger in scale than a little stream",
+    "width": 1100,
+    "height": 733,
+    "bytes": 96134
+  },
+  "湖": {
+    "file": "/assets/characters/watercolor/char-6e56-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a closed body of calm water enclosed by land on every side",
+    "width": 1100,
+    "height": 733,
+    "bytes": 85718
+  },
+  "泉": {
+    "file": "/assets/characters/watercolor/char-6cc9.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 96760
+  },
+  "波": {
+    "file": "/assets/characters/watercolor/char-6ce2-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "small repeated circular ripples on the surface",
+    "width": 1100,
+    "height": 733,
+    "bytes": 74926
+  },
+  "浪": {
+    "file": "/assets/characters/watercolor/char-6d6a.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 64024
+  },
+  "花": {
+    "file": "/assets/characters/watercolor/char-82b1.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 47702
+  },
+  "草": {
+    "file": "/assets/characters/watercolor/char-8349.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 43002
+  },
+  "竹": {
+    "file": "/assets/characters/watercolor/char-7af9.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 48600
+  },
+  "叶": {
+    "file": "/assets/characters/watercolor/char-53f6.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 34026
+  },
+  "树": {
+    "file": "/assets/characters/watercolor/char-6811-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the substantial trunk and expansive leafy canopy of a big tree",
+    "width": 1100,
+    "height": 733,
+    "bytes": 149938
+  },
+  "雷": {
+    "file": "/assets/characters/watercolor/char-96f7.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 59318
+  },
+  "根": {
+    "file": "/assets/characters/watercolor/char-6839-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "roots spreading BELOW a thin ground line, the root network itself is large",
+    "width": 1100,
+    "height": 733,
+    "bytes": 113382
+  },
+  "枝": {
+    "file": "/assets/characters/watercolor/char-679d.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 48664
+  },
+  "森": {
+    "file": "/assets/characters/watercolor/char-68ee-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "closely packed trunks, deep shade and an interior path",
+    "width": 1100,
+    "height": 733,
+    "bytes": 143504
+  },
+  "星": {
+    "file": "/assets/characters/watercolor/char-661f.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 50910
+  },
+  "光": {
+    "file": "/assets/characters/watercolor/char-5149-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the visible diagonal LIGHT BEAM contrasting with the dim room",
+    "width": 1100,
+    "height": 733,
+    "bytes": 69184
+  },
+  "空": {
+    "file": "/assets/characters/watercolor/char-7a7a-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "visible emptiness and a hollow interior with no contents",
+    "width": 1100,
+    "height": 733,
+    "bytes": 56064
+  },
+  "春": {
+    "file": "/assets/characters/watercolor/char-6625.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 62560
+  },
+  "夏": {
+    "file": "/assets/characters/watercolor/char-590f-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "summer clothing, hand fan and strong warm daylight",
+    "width": 1100,
+    "height": 733,
+    "bytes": 69908
+  },
+  "秋": {
+    "file": "/assets/characters/watercolor/char-79cb.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 56758
+  },
+  "冬": {
+    "file": "/assets/characters/watercolor/char-51ac-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "winter season through a snow-covered home and bare branches",
+    "width": 1100,
+    "height": 733,
+    "bytes": 86248
+  },
+  "冷": {
+    "file": "/assets/characters/watercolor/char-51b7-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the bodily feeling of cold expressed by the huddled pose and winter scarf",
+    "width": 1100,
+    "height": 733,
+    "bytes": 64530
+  },
+  "热": {
+    "file": "/assets/characters/watercolor/char-70ed-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "high red thermometer column and rising steam",
+    "width": 1100,
+    "height": 733,
+    "bytes": 44898
+  },
+  "晴": {
+    "file": "/assets/characters/watercolor/char-6674-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "clear weather with no clouds and bright crisp daylight",
+    "width": 1100,
+    "height": 733,
+    "bytes": 107814
+  },
+  "阴": {
+    "file": "/assets/characters/watercolor/char-9634.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 70312
+  },
+  "阳": {
+    "file": "/assets/characters/watercolor/char-9633-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a hillside surface receiving direct sunshine",
+    "width": 1100,
+    "height": 733,
+    "bytes": 88598
+  },
+  "雾": {
+    "file": "/assets/characters/watercolor/char-96fe.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 61994
+  },
+  "露": {
+    "file": "/assets/characters/watercolor/char-9732-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "rounded water beads with bright reflections",
+    "width": 1100,
+    "height": 733,
+    "bytes": 42810
+  },
+  "目": {
+    "file": "/assets/characters/watercolor/char-76ee.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 47264
+  },
+  "耳": {
+    "file": "/assets/characters/watercolor/char-8033.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 46162
+  },
+  "手": {
+    "file": "/assets/characters/watercolor/char-624b.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 27042
+  },
+  "足": {
+    "file": "/assets/characters/watercolor/char-8db3.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 39354
+  },
+  "头": {
+    "file": "/assets/characters/watercolor/char-5934-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the whole head outline and rounded skull",
+    "width": 1100,
+    "height": 733,
+    "bytes": 42346
+  },
+  "心": {
+    "file": "/assets/characters/watercolor/char-5fc3.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 34754
+  },
+  "身": {
+    "file": "/assets/characters/watercolor/char-8eab.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 40146
+  },
+  "牙": {
+    "file": "/assets/characters/watercolor/char-7259.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 25786
+  },
+  "舌": {
+    "file": "/assets/characters/watercolor/char-820c.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 33882
+  },
+  "鼻": {
+    "file": "/assets/characters/watercolor/char-9f3b.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 26136
+  },
+  "脸": {
+    "file": "/assets/characters/watercolor/char-8138-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the facial surface and recognizable features together",
+    "width": 1100,
+    "height": 733,
+    "bytes": 60144
+  },
+  "眼": {
+    "file": "/assets/characters/watercolor/char-773c.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 69422
+  },
+  "发": {
+    "file": "/assets/characters/watercolor/char-53d1.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 76646
+  },
+  "毛": {
+    "file": "/assets/characters/watercolor/char-6bdb.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 57216
+  },
+  "女": {
+    "file": "/assets/characters/watercolor/char-5973.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 50210
+  },
+  "子": {
+    "file": "/assets/characters/watercolor/char-5b50-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a very young small child with infant proportions",
+    "width": 1100,
+    "height": 733,
+    "bytes": 46454
+  },
+  "孩": {
+    "file": "/assets/characters/watercolor/char-5b69-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a growing child actively playing outdoors",
+    "width": 1100,
+    "height": 733,
+    "bytes": 45950
+  },
+  "父": {
+    "file": "/assets/characters/watercolor/char-7236-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the adult father supporting his child on his shoulders",
+    "width": 1100,
+    "height": 733,
+    "bytes": 45014
+  },
+  "母": {
+    "file": "/assets/characters/watercolor/char-6bcd-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the mother and small infant held closely in her arms",
+    "width": 1100,
+    "height": 733,
+    "bytes": 67764
+  },
+  "爸": {
+    "file": "/assets/characters/watercolor/char-7238-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a child joyfully greeting dad at home",
+    "width": 1100,
+    "height": 733,
+    "bytes": 101846
+  },
+  "妈": {
+    "file": "/assets/characters/watercolor/char-5988-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "mother helping her child with a familiar daily task",
+    "width": 1100,
+    "height": 733,
+    "bytes": 67560
+  },
+  "兄": {
+    "file": "/assets/characters/watercolor/char-5144-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the older brother leading and helping the smaller child",
+    "width": 1100,
+    "height": 733,
+    "bytes": 82566
+  },
+  "弟": {
+    "file": "/assets/characters/watercolor/char-5f1f-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the YOUNGER boy as the main focal figure",
+    "width": 1100,
+    "height": 733,
+    "bytes": 61568
+  },
+  "姐": {
+    "file": "/assets/characters/watercolor/char-59d0-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the older sister taking care of the younger girl",
+    "width": 1100,
+    "height": 733,
+    "bytes": 70914
+  },
+  "妹": {
+    "file": "/assets/characters/watercolor/char-59b9-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the YOUNGER girl with a playful small-child pose",
+    "width": 1100,
+    "height": 733,
+    "bytes": 68674
+  },
+  "友": {
+    "file": "/assets/characters/watercolor/char-53cb-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "one friend helping another through a clear clasped-hand gesture",
+    "width": 1100,
+    "height": 733,
+    "bytes": 83918
+  },
+  "朋": {
+    "file": "/assets/characters/watercolor/char-670b.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 96652
+  },
+  "师": {
+    "file": "/assets/characters/watercolor/char-5e08.webp",
+    "tool": "built-in image_gen",
+    "width": 1100,
+    "height": 733,
+    "bytes": 75158
+  },
+  "生": {
+    "file": "/assets/characters/watercolor/char-751f-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a school student identified by backpack and school arrival",
+    "width": 1100,
+    "height": 733,
+    "bytes": 101102
+  },
+  "我": {
+    "file": "/assets/characters/watercolor/char-6211-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a finger pointing clearly back toward the speaker own chest",
+    "width": 1100,
+    "height": 733,
+    "bytes": 50026
+  },
+  "你": {
+    "file": "/assets/characters/watercolor/char-4f60-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "directly addressing the person opposite the viewer",
+    "width": 1100,
+    "height": 733,
+    "bytes": 52736
+  },
+  "他": {
+    "file": "/assets/characters/watercolor/char-4ed6-v3.webp",
+    "tool": "built-in image_gen",
+    "revision": 3,
+    "distinctiveFeature": "a clearly visible THIRD male person being pointed to by a cropped foreground speaker",
+    "width": 1100,
+    "height": 733,
+    "bytes": 63560
+  },
+  "她": {
+    "file": "/assets/characters/watercolor/char-5979-v3.webp",
+    "tool": "built-in image_gen",
+    "revision": 3,
+    "distinctiveFeature": "a clearly visible THIRD female person being indicated by a cropped foreground speaker",
+    "width": 1100,
+    "height": 733,
+    "bytes": 62476
+  },
+  "皮": {
+    "file": "/assets/characters/watercolor/char-76ae-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the soft outer SKIN surface and its natural fold, rather than a hand gesture",
+    "width": 1100,
+    "height": 733,
+    "bytes": 47820
+  },
+  "血": {
+    "file": "/assets/characters/watercolor/char-8840.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 28352
+  },
+  "骨": {
+    "file": "/assets/characters/watercolor/char-9aa8.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 42734
+  },
+  "男": {
+    "file": "/assets/characters/watercolor/char-7537.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 43026
+  },
+  "老": {
+    "file": "/assets/characters/watercolor/char-8001.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 61914
+  },
+  "好": {
+    "file": "/assets/characters/watercolor/char-597d.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 29606
+  },
+  "爱": {
+    "file": "/assets/characters/watercolor/char-7231.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 43258
+  },
+  "笑": {
+    "file": "/assets/characters/watercolor/char-7b11-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "unmistakable open-mouth laughter",
+    "width": 1100,
+    "height": 733,
+    "bytes": 65338
+  },
+  "哭": {
+    "file": "/assets/characters/watercolor/char-54ed-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "visible tears and a sad crying expression",
+    "width": 1100,
+    "height": 733,
+    "bytes": 86728
+  },
+  "看": {
+    "file": "/assets/characters/watercolor/char-770b-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "eyes actively looking through binoculars",
+    "width": 1100,
+    "height": 733,
+    "bytes": 85162
+  },
+  "听": {
+    "file": "/assets/characters/watercolor/char-542c.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 50498
+  },
+  "说": {
+    "file": "/assets/characters/watercolor/char-8bf4.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 66426
+  },
+  "学": {
+    "file": "/assets/characters/watercolor/char-5b66-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "actively studying and practising rather than merely looking",
+    "width": 1100,
+    "height": 733,
+    "bytes": 55524
+  },
+  "米": {
+    "file": "/assets/characters/watercolor/char-7c73-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "dry separate elongated grains and grain sack",
+    "width": 1100,
+    "height": 733,
+    "bytes": 66688
+  },
+  "面": {
+    "file": "/assets/characters/watercolor/char-9762.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 60138
+  },
+  "饭": {
+    "file": "/assets/characters/watercolor/char-996d.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 30386
+  },
+  "茶": {
+    "file": "/assets/characters/watercolor/char-8336-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "teapot spout, small tea cup and loose tea leaves",
+    "width": 1100,
+    "height": 733,
+    "bytes": 45624
+  },
+  "菜": {
+    "file": "/assets/characters/watercolor/char-83dc.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 51736
+  },
+  "鱼": {
+    "file": "/assets/characters/watercolor/char-9c7c.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 51234
+  },
+  "蛋": {
+    "file": "/assets/characters/watercolor/char-86cb.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 43332
+  },
+  "瓜": {
+    "file": "/assets/characters/watercolor/char-74dc.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 57972
+  },
+  "果": {
+    "file": "/assets/characters/watercolor/char-679c.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 51704
+  },
+  "豆": {
+    "file": "/assets/characters/watercolor/char-8c46-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "round beans visible inside an opened pod",
+    "width": 1100,
+    "height": 733,
+    "bytes": 63374
+  },
+  "糖": {
+    "file": "/assets/characters/watercolor/char-7cd6.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 58058
+  },
+  "盐": {
+    "file": "/assets/characters/watercolor/char-76d0.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 37876
+  },
+  "油": {
+    "file": "/assets/characters/watercolor/char-6cb9.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 40734
+  },
+  "酸": {
+    "file": "/assets/characters/watercolor/char-9178.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 52872
+  },
+  "甜": {
+    "file": "/assets/characters/watercolor/char-751c-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "thick golden honey suggesting sweetness",
+    "width": 1100,
+    "height": 733,
+    "bytes": 52586
+  },
+  "苦": {
+    "file": "/assets/characters/watercolor/char-82e6.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 62720
+  },
+  "辣": {
+    "file": "/assets/characters/watercolor/char-8fa3.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 56546
+  },
+  "香": {
+    "file": "/assets/characters/watercolor/char-9999-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the visible curl of fragrant incense smoke",
+    "width": 1100,
+    "height": 733,
+    "bytes": 19650
+  },
+  "饱": {
+    "file": "/assets/characters/watercolor/char-9971-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a satisfied relaxed FULL-after-eating pose",
+    "width": 1100,
+    "height": 733,
+    "bytes": 74114
+  },
+  "饿": {
+    "file": "/assets/characters/watercolor/char-997f-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "hungry anticipation and attention directed at uneaten food",
+    "width": 1100,
+    "height": 733,
+    "bytes": 92672
+  },
+  "吃": {
+    "file": "/assets/characters/watercolor/char-5403.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 56060
+  },
+  "喝": {
+    "file": "/assets/characters/watercolor/char-559d.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 52076
+  },
+  "煮": {
+    "file": "/assets/characters/watercolor/char-716e-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "food cooking directly in bubbling water",
+    "width": 1100,
+    "height": 733,
+    "bytes": 78060
+  },
+  "汤": {
+    "file": "/assets/characters/watercolor/char-6c64-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "liquid broth lifted in a soup spoon",
+    "width": 1100,
+    "height": 733,
+    "bytes": 58296
+  },
+  "奶": {
+    "file": "/assets/characters/watercolor/char-5976-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "opaque white milk and characteristic milk bottle",
+    "width": 1100,
+    "height": 733,
+    "bytes": 31756
+  },
+  "肉": {
+    "file": "/assets/characters/watercolor/char-8089.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 61508
+  },
+  "炒": {
+    "file": "/assets/characters/watercolor/char-7092.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 74432
+  },
+  "盘": {
+    "file": "/assets/characters/watercolor/char-76d8.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 40296
+  },
+  "筷": {
+    "file": "/assets/characters/watercolor/char-7b77.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 40910
+  },
+  "刀": {
+    "file": "/assets/characters/watercolor/char-5200.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 59058
+  },
+  "勺": {
+    "file": "/assets/characters/watercolor/char-52fa.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 37090
+  },
+  "饼": {
+    "file": "/assets/characters/watercolor/char-997c.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 64300
+  },
+  "餐": {
+    "file": "/assets/characters/watercolor/char-9910.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 66226
+  },
+  "鸡": {
+    "file": "/assets/characters/watercolor/char-9e21.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 47882
+  },
+  "鸭": {
+    "file": "/assets/characters/watercolor/char-9e2d.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 43480
+  },
+  "牛": {
+    "file": "/assets/characters/watercolor/char-725b.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 64528
+  },
+  "羊": {
+    "file": "/assets/characters/watercolor/char-7f8a.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 42254
+  },
+  "虾": {
+    "file": "/assets/characters/watercolor/char-867e.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 54012
+  },
+  "猪": {
+    "file": "/assets/characters/watercolor/char-732a.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 46024
+  },
+  "蟹": {
+    "file": "/assets/characters/watercolor/char-87f9.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 80118
+  },
+  "桃": {
+    "file": "/assets/characters/watercolor/char-6843-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "fuzzy peach skin, central seam and large stone",
+    "width": 1100,
+    "height": 733,
+    "bytes": 72616
+  },
+  "梨": {
+    "file": "/assets/characters/watercolor/char-68a8.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 39360
+  },
+  "苹": {
+    "file": "/assets/characters/watercolor/char-82f9-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "smooth glossy red apple skin and familiar apple silhouette",
+    "width": 1100,
+    "height": 733,
+    "bytes": 42392
+  },
+  "橙": {
+    "file": "/assets/characters/watercolor/char-6a59.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 50376
+  },
+  "饺": {
+    "file": "/assets/characters/watercolor/char-997a.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 53868
+  },
+  "碗": {
+    "file": "/assets/characters/watercolor/char-7897.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 39738
+  },
+  "烧": {
+    "file": "/assets/characters/watercolor/char-70e7-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the act of heating water on a stove",
+    "width": 1100,
+    "height": 733,
+    "bytes": 58850
+  },
+  "杯": {
+    "file": "/assets/characters/watercolor/char-676f.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 41738
+  },
+  "家": {
+    "file": "/assets/characters/watercolor/char-5bb6-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "home as a place where the family lives together",
+    "width": 1100,
+    "height": 733,
+    "bytes": 112910
+  },
+  "烤": {
+    "file": "/assets/characters/watercolor/char-70e4.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 74560
+  },
+  "蒸": {
+    "file": "/assets/characters/watercolor/char-84b8.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 62600
+  },
+  "室": {
+    "file": "/assets/characters/watercolor/char-5ba4-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "an enclosed room arranged as a classroom",
+    "width": 1100,
+    "height": 733,
+    "bytes": 82426
+  },
+  "厅": {
+    "file": "/assets/characters/watercolor/char-5385.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 83784
+  },
+  "床": {
+    "file": "/assets/characters/watercolor/char-5e8a.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 41548
+  },
+  "桌": {
+    "file": "/assets/characters/watercolor/char-684c.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 52958
+  },
+  "灯": {
+    "file": "/assets/characters/watercolor/char-706f.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 33544
+  },
+  "椅": {
+    "file": "/assets/characters/watercolor/char-6905.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 36074
+  },
+  "书": {
+    "file": "/assets/characters/watercolor/char-4e66.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 49730
+  },
+  "笔": {
+    "file": "/assets/characters/watercolor/char-7b14.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 46890
+  },
+  "纸": {
+    "file": "/assets/characters/watercolor/char-7eb8.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 29330
+  },
+  "包": {
+    "file": "/assets/characters/watercolor/char-5305.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 58304
+  },
+  "衣": {
+    "file": "/assets/characters/watercolor/char-8863.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 45674
+  },
+  "车": {
+    "file": "/assets/characters/watercolor/char-8f66.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 59528
+  },
+  "鞋": {
+    "file": "/assets/characters/watercolor/char-978b.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 52470
+  },
+  "马": {
+    "file": "/assets/characters/watercolor/char-9a6c.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 43076
+  },
+  "路": {
+    "file": "/assets/characters/watercolor/char-8def.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 85810
+  },
+  "街": {
+    "file": "/assets/characters/watercolor/char-8857.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 115506
+  },
+  "桥": {
+    "file": "/assets/characters/watercolor/char-6865.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 101272
+  },
+  "店": {
+    "file": "/assets/characters/watercolor/char-5e97.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 99136
+  },
+  "市": {
+    "file": "/assets/characters/watercolor/char-5e02-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a MARKET with multiple stalls and goods",
+    "width": 1100,
+    "height": 733,
+    "bytes": 118926
+  },
+  "房": {
+    "file": "/assets/characters/watercolor/char-623f.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 70128
+  },
+  "窗": {
+    "file": "/assets/characters/watercolor/char-7a97.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 64028
+  },
+  "屋": {
+    "file": "/assets/characters/watercolor/char-5c4b-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the complete house exterior, especially roof and walls",
+    "width": 1100,
+    "height": 733,
+    "bytes": 73704
+  },
+  "门": {
+    "file": "/assets/characters/watercolor/char-95e8-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the tall vertical door panel and surrounding frame",
+    "width": 1100,
+    "height": 733,
+    "bytes": 42206
+  },
+  "国": {
+    "file": "/assets/characters/watercolor/char-56fd.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 51802
+  },
+  "站": {
+    "file": "/assets/characters/watercolor/char-7ad9.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 93762
+  },
+  "机": {
+    "file": "/assets/characters/watercolor/char-673a-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "mechanical gears and moving machine parts",
+    "width": 1100,
+    "height": 733,
+    "bytes": 71418
+  },
+  "场": {
+    "file": "/assets/characters/watercolor/char-573a-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a large open AREA used for a specific activity",
+    "width": 1100,
+    "height": 733,
+    "bytes": 51744
+  },
+  "船": {
+    "file": "/assets/characters/watercolor/char-8239.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 58124
+  },
+  "港": {
+    "file": "/assets/characters/watercolor/char-6e2f-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "docks and port infrastructure around a moored ship",
+    "width": 1100,
+    "height": 733,
+    "bytes": 97522
+  },
+  "岛": {
+    "file": "/assets/characters/watercolor/char-5c9b.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 69558
+  },
+  "园": {
+    "file": "/assets/characters/watercolor/char-56ed.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 139028
+  },
+  "工": {
+    "file": "/assets/characters/watercolor/char-5de5.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 63006
+  },
+  "公": {
+    "file": "/assets/characters/watercolor/char-516c-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a shared PUBLIC facility used by multiple people",
+    "width": 1100,
+    "height": 733,
+    "bytes": 114888
+  },
+  "厂": {
+    "file": "/assets/characters/watercolor/char-5382.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 53468
+  },
+  "楼": {
+    "file": "/assets/characters/watercolor/char-697c.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 61862
+  },
+  "梯": {
+    "file": "/assets/characters/watercolor/char-68af.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 72002
+  },
+  "墙": {
+    "file": "/assets/characters/watercolor/char-5899.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 90084
+  },
+  "走": {
+    "file": "/assets/characters/watercolor/char-8d70-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the alternating walking step and grounded feet",
+    "width": 1100,
+    "height": 733,
+    "bytes": 39596
+  },
+  "跑": {
+    "file": "/assets/characters/watercolor/char-8dd1.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 53146
+  },
+  "来": {
+    "file": "/assets/characters/watercolor/char-6765-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "movement coming toward the viewer",
+    "width": 1100,
+    "height": 733,
+    "bytes": 38830
+  },
+  "去": {
+    "file": "/assets/characters/watercolor/char-53bb-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "movement going away from the viewer",
+    "width": 1100,
+    "height": 733,
+    "bytes": 76746
+  },
+  "回": {
+    "file": "/assets/characters/watercolor/char-56de.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 97362
+  },
+  "开": {
+    "file": "/assets/characters/watercolor/char-5f00-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the opening action and fully raised lid exposing the contents",
+    "width": 1100,
+    "height": 733,
+    "bytes": 82710
+  },
+  "关": {
+    "file": "/assets/characters/watercolor/char-5173-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the closing action visibly blocking the opening",
+    "width": 1100,
+    "height": 733,
+    "bytes": 80696
+  },
+  "村": {
+    "file": "/assets/characters/watercolor/char-6751.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 113338
+  },
+  "城": {
+    "file": "/assets/characters/watercolor/char-57ce.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 99886
+  },
+  "坐": {
+    "file": "/assets/characters/watercolor/char-5750.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 41540
+  },
+  "院": {
+    "file": "/assets/characters/watercolor/char-9662.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 72772
+  },
+  "校": {
+    "file": "/assets/characters/watercolor/char-6821.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 107712
+  },
+  "五": {
+    "file": "/assets/characters/watercolor/char-4e94-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "five distinct arms radiating from one center",
+    "width": 1100,
+    "height": 733,
+    "bytes": 46870
+  },
+  "七": {
+    "file": "/assets/characters/watercolor/char-4e03-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "seven countable folded cranes",
+    "width": 1100,
+    "height": 733,
+    "bytes": 56784
+  },
+  "八": {
+    "file": "/assets/characters/watercolor/char-516b-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "eight distinct visible arms",
+    "width": 1100,
+    "height": 733,
+    "bytes": 56742
+  },
+  "九": {
+    "file": "/assets/characters/watercolor/char-4e5d-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "nine marbles in a three-by-three arrangement",
+    "width": 1100,
+    "height": 733,
+    "bytes": 58664
+  },
+  "十": {
+    "file": "/assets/characters/watercolor/char-5341-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "two groups of five sticks making ten",
+    "width": 1100,
+    "height": 733,
+    "bytes": 40528
+  },
+  "百": {
+    "file": "/assets/characters/watercolor/char-767e-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "one hundred indicated by an abacus and a clear 100 tile",
+    "width": 1100,
+    "height": 733,
+    "bytes": 73272
+  },
+  "千": {
+    "file": "/assets/characters/watercolor/char-5343-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a very large thousand-fold quantity of cranes and the explicit 1000 tag",
+    "width": 1100,
+    "height": 733,
+    "bytes": 108864
+  },
+  "万": {
+    "file": "/assets/characters/watercolor/char-4e07-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a vast quantity of lights and the clear 10000 tile",
+    "width": 1100,
+    "height": 733,
+    "bytes": 154448
+  },
+  "零": {
+    "file": "/assets/characters/watercolor/char-96f6-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "zero and an empty count, nothing remaining",
+    "width": 1100,
+    "height": 733,
+    "bytes": 45026
+  },
+  "两": {
+    "file": "/assets/characters/watercolor/char-4e24-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "two countable separate objects together",
+    "width": 1100,
+    "height": 733,
+    "bytes": 42782
+  },
+  "半": {
+    "file": "/assets/characters/watercolor/char-534a-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "one visibly halved round object with a straight cut edge",
+    "width": 1100,
+    "height": 733,
+    "bytes": 76422
+  },
+  "双": {
+    "file": "/assets/characters/watercolor/char-53cc-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a natural matching pair of two complementary items",
+    "width": 1100,
+    "height": 733,
+    "bytes": 73176
+  },
+  "单": {
+    "file": "/assets/characters/watercolor/char-5355-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "one item by itself, an unmistakable SINGLE mitten",
+    "width": 1100,
+    "height": 733,
+    "bytes": 55798
+  },
+  "多": {
+    "file": "/assets/characters/watercolor/char-591a.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 75642
+  },
+  "少": {
+    "file": "/assets/characters/watercolor/char-5c11.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 36882
+  },
+  "今": {
+    "file": "/assets/characters/watercolor/char-4eca-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the current day being marked in use right now",
+    "width": 1100,
+    "height": 733,
+    "bytes": 83702
+  },
+  "明": {
+    "file": "/assets/characters/watercolor/char-660e-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "preparation for the next day and a forward-turned calendar page",
+    "width": 1100,
+    "height": 733,
+    "bytes": 89166
+  },
+  "昨": {
+    "file": "/assets/characters/watercolor/char-6628-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a past calendar page already removed and a closed record",
+    "width": 1100,
+    "height": 733,
+    "bytes": 62244
+  },
+  "年": {
+    "file": "/assets/characters/watercolor/char-5e74-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a whole year represented by a thick annual calendar",
+    "width": 1100,
+    "height": 733,
+    "bytes": 56204
+  },
+  "一": {
+    "file": "/assets/characters/watercolor/char-4e00-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a single candle, one object",
+    "width": 1100,
+    "height": 733,
+    "bytes": 22178
+  },
+  "四": {
+    "file": "/assets/characters/watercolor/char-56db-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "four corners and four countable blocks",
+    "width": 1100,
+    "height": 733,
+    "bytes": 46496
+  },
+  "二": {
+    "file": "/assets/characters/watercolor/char-4e8c-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "two distinct pears",
+    "width": 1100,
+    "height": 733,
+    "bytes": 44576
+  },
+  "岁": {
+    "file": "/assets/characters/watercolor/char-5c81.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 52696
+  },
+  "三": {
+    "file": "/assets/characters/watercolor/char-4e09-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "three individually visible stones",
+    "width": 1100,
+    "height": 733,
+    "bytes": 43710
+  },
+  "六": {
+    "file": "/assets/characters/watercolor/char-516d-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "six berries forming a six-sided ring",
+    "width": 1100,
+    "height": 733,
+    "bytes": 45270
+  },
+  "晚": {
+    "file": "/assets/characters/watercolor/char-665a.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 97292
+  },
+  "午": {
+    "file": "/assets/characters/watercolor/char-5348-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "midday lunch and twelve-o’clock",
+    "width": 1100,
+    "height": 733,
+    "bytes": 87656
+  },
+  "夜": {
+    "file": "/assets/characters/watercolor/char-591c.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 84256
+  },
+  "周": {
+    "file": "/assets/characters/watercolor/char-5468-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "seven days grouped into one week",
+    "width": 1100,
+    "height": 733,
+    "bytes": 53844
+  },
+  "期": {
+    "file": "/assets/characters/watercolor/char-671f.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 47768
+  },
+  "季": {
+    "file": "/assets/characters/watercolor/char-5b63-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the four different seasons shown through their distinctive natural signs",
+    "width": 1100,
+    "height": 733,
+    "bytes": 51394
+  },
+  "每": {
+    "file": "/assets/characters/watercolor/char-6bcf-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the same attention given to EACH item in the row",
+    "width": 1100,
+    "height": 733,
+    "bytes": 56298
+  },
+  "次": {
+    "file": "/assets/characters/watercolor/char-6b21-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "one repeatable occurrence of an action",
+    "width": 1100,
+    "height": 733,
+    "bytes": 31978
+  },
+  "个": {
+    "file": "/assets/characters/watercolor/char-4e2a-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "individual objects treated one by one while counting",
+    "width": 1100,
+    "height": 733,
+    "bytes": 49180
+  },
+  "本": {
+    "file": "/assets/characters/watercolor/char-672c-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "one countable bound volume",
+    "width": 1100,
+    "height": 733,
+    "bytes": 62354
+  },
+  "张": {
+    "file": "/assets/characters/watercolor/char-5f20-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "one complete FLAT sheet held visibly as a unit",
+    "width": 1100,
+    "height": 733,
+    "bytes": 32644
+  },
+  "块": {
+    "file": "/assets/characters/watercolor/char-5757-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a distinct separate CHUNK of something larger",
+    "width": 1100,
+    "height": 733,
+    "bytes": 68694
+  },
+  "只": {
+    "file": "/assets/characters/watercolor/char-53ea.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 34120
+  },
+  "第": {
+    "file": "/assets/characters/watercolor/char-7b2c-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a ranked position represented by the highest place and medal",
+    "width": 1100,
+    "height": 733,
+    "bytes": 49180
+  },
+  "先": {
+    "file": "/assets/characters/watercolor/char-5148-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the person who is FIRST in the order",
+    "width": 1100,
+    "height": 733,
+    "bytes": 68130
+  },
+  "再": {
+    "file": "/assets/characters/watercolor/char-518d-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a clear parting and goodbye wave as one person leaves",
+    "width": 1100,
+    "height": 733,
+    "bytes": 112640
+  },
+  "长": {
+    "file": "/assets/characters/watercolor/char-957f-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "an exceptionally long extended length of fabric",
+    "width": 1100,
+    "height": 733,
+    "bytes": 37922
+  },
+  "短": {
+    "file": "/assets/characters/watercolor/char-77ed-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a clearly shortened stubby pencil",
+    "width": 1100,
+    "height": 733,
+    "bytes": 41824
+  },
+  "快": {
+    "file": "/assets/characters/watercolor/char-5feb-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "fast walking shown by brisk stride and trailing scarf",
+    "width": 1100,
+    "height": 733,
+    "bytes": 41978
+  },
+  "分": {
+    "file": "/assets/characters/watercolor/char-5206-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "a small cooking MINUTE timer with its tomato silhouette",
+    "width": 1100,
+    "height": 733,
+    "bytes": 52940
+  },
+  "慢": {
+    "file": "/assets/characters/watercolor/char-6162-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "slow small steps and unhurried attention",
+    "width": 1100,
+    "height": 733,
+    "bytes": 60142
+  },
+  "秒": {
+    "file": "/assets/characters/watercolor/char-79d2.webp",
+    "tool": "built-in image_gen",
+    "revision": 1,
+    "distinctiveFeature": "",
+    "width": 1100,
+    "height": 733,
+    "bytes": 37592
+  },
+  "点": {
+    "file": "/assets/characters/watercolor/char-70b9-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "the hands giving an exact o’clock time",
+    "width": 1100,
+    "height": 733,
+    "bytes": 37620
+  },
+  "早": {
+    "file": "/assets/characters/watercolor/char-65e9-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "daybreak and a crowing rooster, early morning activity",
+    "width": 1100,
+    "height": 733,
+    "bytes": 87162
+  },
+  "时": {
+    "file": "/assets/characters/watercolor/char-65f6-v2.webp",
+    "tool": "built-in image_gen",
+    "revision": 2,
+    "distinctiveFeature": "time passing through an HOURGLASS",
+    "width": 1100,
+    "height": 733,
+    "bytes": 40336
+  }
+}

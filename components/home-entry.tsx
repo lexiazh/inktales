@@ -31,11 +31,7 @@ export function HomeEntry({onGuest}:{onGuest:()=>void}){
   }finally{setBusy(false);}
  }
  return <section className="entry-page" aria-label="Welcome to InkTales">
-  <picture className="entry-art-layer">
-   <source media="(max-width:760px)" srcSet="/assets/landscape-scroll-clean.jpg"/>
-   <img className="entry-art" src="/assets/landscape-scroll-background.png" alt="An ink-brush path winding into a misty mountain scroll"/>
-  </picture>
-  <img className="entry-traveler" src="/assets/landscape-traveler.png" alt="" aria-hidden="true"/>
+  <div className="brand entry-brand" role="img" aria-label="InkTales"><span className="seal">墨</span><span>Ink<span className="brand-light">Tales</span><small>STORIES BEHIND THE STROKES</small></span></div>
   <div className="entry-copy">
    <span className="eyebrow">A MORE MEMORABLE WAY TO LEARN CHINESE</span>
    <h1>Every character<br/><em>holds a story.</em></h1>

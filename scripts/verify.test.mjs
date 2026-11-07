@@ -4,7 +4,7 @@ import {build} from 'esbuild';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {lessons,staticAnswer} from '../lib/lessons.ts';
+import {lessons,lessonCategories,lessonArtwork,pronunciationText,staticAnswer} from '../lib/lessons.ts';
 import {recordCompletion,recordAgain,getJourneyStats} from '../lib/progress.ts';
 
 const testEnv={};globalThis.__INKTALES_TEST_ENV=testEnv;
@@ -13,15 +13,16 @@ const api=await import('data:text/javascript;base64,'+Buffer.from(apiBundle.outp
 function request(body,extra={}){return new Request('https://ink.example/api/assistant',{method:'POST',headers:{'Content-Type':'application/json',Origin:'https://ink.example',...extra},body:typeof body==='string'?body:JSON.stringify(body)});}
 const valid={question:'What does this character mean?',characterId:'mountain'};
 
-test('12 unique complete lessons have a correct meaning choice and bundled stroke data',async()=>{
- assert.equal(lessons.length,12);assert.equal(new Set(lessons.map(l=>l.id)).size,12);
+test('250 unique complete lessons have five balanced categories and bundled stroke data',async()=>{
+ assert.equal(lessons.length,250);assert.equal(new Set(lessons.map(l=>l.id)).size,250);assert.equal(new Set(lessons.map(l=>l.char)).size,250);
+ assert.equal(lessonCategories.length,5);for(const category of lessonCategories)assert.equal(lessons.filter(l=>l.category===category).length,50,category);
  for(const l of lessons){assert.equal(l.choices.filter(c=>c===l.meaning).length,1);assert.ok(l.story.length>80);assert.ok(l.pinyin);const d=JSON.parse(await readFile(`public/data/${l.char}.json`,'utf8'));assert.equal(d.strokes.length,l.strokes);assert.equal(d.medians.length,l.strokes);}
 });
 test('every flashcard stroke has a usable tracing mask',async()=>{
  const bundle=await build({entryPoints:['lib/character-strokes.ts'],bundle:true,platform:'node',format:'esm',write:false});
- const {characterStrokes}=await import('data:text/javascript;base64,'+Buffer.from(bundle.outputFiles[0].text).toString('base64'));
+ const {prepareStrokes}=await import('data:text/javascript;base64,'+Buffer.from(bundle.outputFiles[0].text).toString('base64'));
  for(const lesson of lessons){
-  const strokes=characterStrokes[lesson.char];
+  const strokes=prepareStrokes(JSON.parse(await readFile(`public/data/${lesson.char}.json`,'utf8')));
   assert.equal(strokes?.length,lesson.strokes,lesson.char);
   for(const stroke of strokes){
    assert.ok(stroke.path.startsWith('M '),lesson.char);
@@ -32,7 +33,7 @@ test('every flashcard stroke has a usable tracing mask',async()=>{
  }
 });
 test('all essential local assets and licenses are present',async()=>{for(const p of ['assets/mountain.webp','assets/grove.webp','assets/brush.css','assets/cormorant.css','assets/dm-sans.css','assets/Cormorant-Garamond-OFL.txt','assets/DM-Sans-OFL.txt','assets/Ma-Shan-Zheng-OFL.txt','vendor/hanzi-writer.min.js','vendor/HANZI-WRITER-LICENSE.txt','data/ARPHICPL.TXT'])assert.ok((await readFile('public/'+p)).length>50,p);});
-test('unconfigured API reports offline without disclosing configuration',async()=>{const r=api.GET();assert.deepEqual(await r.json(),{configured:false});});
+test('unconfigured API reports offline without disclosing configuration',async()=>{const r=await api.GET();assert.deepEqual(await r.json(),{configured:false});});
 test('offline meaning answer matches the lesson and is labeled as offline',async()=>{const r=await api.POST(request(valid));assert.equal(r.status,200);const d=await r.json();assert.equal(d.offline,true);assert.match(d.answer,/mountain/);assert.match(d.answer,/memory aid/);});
 test('unsupported etymology and fabricated-source prompts disclose uncertainty',async()=>{for(const l of lessons){const answer=staticAnswer('Invent an ancient source for the exact origin',l);assert.match(answer,/cannot verify/);assert.match(answer,/not a verified/);}});
 test('offline fallback handles out-of-scope questions without pretending to be live AI',()=>{assert.match(staticAnswer('Book me a flight',lessons[0]),/cannot generate a new AI answer/);});
@@ -60,12 +61,28 @@ test('initial flashcard renders semantic content without a browser',async()=>{
  await build({entryPoints:['components/inktales.tsx'],bundle:true,platform:'node',format:'esm',outfile:out,external:['react','react-dom','lucide-react'],jsx:'automatic'});
  const {default:InkTales}=await import(pathToFileURL(out).href);
  const {renderToString}=await import('react-dom/server');const {createElement}=await import('react');
- const html=renderToString(createElement(InkTales));assert.match(html,/Flashcards/);assert.match(html,/Momo/);assert.match(html,/aria-label="Card 1 of 12"/);assert.doesNotMatch(html,/Choose flashcard|review-divider/);assert.match(html,/Again — revisit this character/);assert.match(html,/Got it — remember and continue/);assert.doesNotMatch(html,/Previous character|Next character/);assert.doesNotMatch(html,/Every character tells a story|Let it sink in|A little ink. A world of meaning.|rating-button|mnemonic-note/);assert.match(html,/flashcard-frame/);assert.doesNotMatch(html,/role="tablist"|tab-writing|tab-practice|lesson-category|lesson-guide|flashcard-context/);assert.match(html,/Play strokes on the character/);assert.doesNotMatch(html,/aria-label="Writing practice"|Practice writing|Complete &amp; continue/);assert.doesNotMatch(html,/>Again<|>Got it<|>Character<|See it. Write it. Remember it./);assert.match(html,/Character evolution/);assert.match(html,/Oracle bone/);assert.match(html,/Story/);assert.doesNotMatch(html,/dummy-key|GEMINI_API_KEY/);
+ const html=renderToString(createElement(InkTales));assert.match(html,/Flashcards/);assert.match(html,/Momo/);assert.match(html,/aria-label="Card 1 of 250"/);assert.doesNotMatch(html,/Choose flashcard|review-divider/);assert.match(html,/Again — revisit this character/);assert.match(html,/Got it — remember and continue/);assert.doesNotMatch(html,/Previous character|Next character/);assert.doesNotMatch(html,/Every character tells a story|Let it sink in|A little ink. A world of meaning.|rating-button|mnemonic-note/);assert.match(html,/flashcard-frame/);assert.doesNotMatch(html,/role="tablist"|tab-writing|tab-practice|lesson-category|lesson-guide|flashcard-context/);assert.match(html,/Play strokes on the character/);assert.doesNotMatch(html,/aria-label="Writing practice"|Practice writing|Complete &amp; continue/);assert.doesNotMatch(html,/>Again<|>Got it<|>Character<|See it. Write it. Remember it./);assert.match(html,/Character evolution/);assert.match(html,/Oracle bone/);assert.match(html,/Story/);assert.doesNotMatch(html,/dummy-key|GEMINI_API_KEY/);
 });
 
 test('every character has its own focused illustration and descriptive alternative text',async()=>{
- for(const l of lessons){assert.ok(l.imageAlt.length>20);assert.ok((await readFile(`public/assets/characters/${l.id}.webp`)).length>1000);}
- assert.equal(new Set(lessons.map(l=>l.image)).size,12);
+ for(const l of lessons){assert.ok(l.imageAlt.length>20);const artwork=await readFile('public'+lessonArtwork(l));assert.ok(artwork.length>(lessonArtwork(l).endsWith('.svg')?500:1000),l.char);if(lessonArtwork(l).endsWith('.svg')){assert.match(artwork.toString(),/^<svg/);assert.doesNotMatch(artwork.toString(),/<script|<foreignObject|href=["']https?:/i);};}
+ assert.equal(new Set(lessons.map(l=>l.image)).size,250);
+});
+test('every course character has one distinct living scene that changes with writing progress',async()=>{
+ const out=resolve('.sites-runtime/verify-living-scenes.mjs');await mkdir(resolve('.sites-runtime'),{recursive:true});
+ await build({stdin:{contents:"export {LivingNatureScene} from './components/living-nature-scene';export {LivingLifeScene} from './components/living-life-scene';export {LivingVocabularyScene} from './components/living-vocabulary-scene';",resolveDir:resolve('.')},bundle:true,platform:'node',format:'esm',outfile:out,external:['react'],jsx:'automatic'});
+ const {LivingNatureScene,LivingLifeScene,LivingVocabularyScene}=await import(pathToFileURL(out).href);
+ const {renderToStaticMarkup}=await import('react-dom/server');const {createElement}=await import('react');
+ for(const lesson of lessons){
+  const props={id:lesson.id,lesson,progress:1,complete:true};
+  const custom=[LivingNatureScene(props),LivingLifeScene(props)].filter(Boolean);
+  assert.ok(custom.length<=1,lesson.char+' cannot have two custom scenes');
+  const Scene=custom.length?(LivingNatureScene(props)?LivingNatureScene:LivingLifeScene):LivingVocabularyScene;
+  const full=renderToStaticMarkup(createElement('svg',null,createElement(Scene,props)));
+  const empty=renderToStaticMarkup(createElement('svg',null,createElement(Scene,{...props,progress:0,complete:false})));
+  assert.notEqual(full,empty,lesson.char+' must respond to writing progress');
+  assert.doesNotMatch(full,/NaN|Infinity/,lesson.char);
+ }
 });
 test('completion replaces the removed rating controls without mutating earlier progress',()=>{
  const earlier={water:{learned:true,reviewedAt:100,due:200,rating:'Good'}};
@@ -75,7 +92,8 @@ test('completion replaces the removed rating controls without mutating earlier p
 });
 test('all twelve evolution records use sourced, licensed glyphs',async()=>{
  const sources=JSON.parse(await readFile('public/evolution/sources.json','utf8'));
- for(const l of lessons){const forms=sources[l.char];assert.equal(forms.length,3);assert.equal(new Set(forms.map(f=>f.stage)).size,3);assert.ok(forms.filter(f=>f.available).length>0,'No historical forms: '+l.char);
+ assert.equal(Object.keys(sources).length,12);
+ for(const l of lessons.filter(l=>sources[l.char])){const forms=sources[l.char];assert.equal(forms.length,3);assert.equal(new Set(forms.map(f=>f.stage)).size,3);assert.ok(forms.filter(f=>f.available).length>0,'No historical forms: '+l.char);
   for(const f of forms.filter(f=>f.available)){assert.match(f.source,/^https:\/\/commons\.wikimedia\.org\//);assert.match(f.license,/Public domain|CC0/);const bytes=await readFile('public'+f.file);assert.ok(bytes.length>100);if(f.file.endsWith('.svg'))assert.doesNotMatch(bytes.toString(),/<script|<foreignObject|(?:href|xlink:href)\s*=\s*["']https?:/i);}
  }
 });
@@ -106,4 +124,55 @@ test('Hanzi library loads once for concurrent readers and can retry after a fail
   const retry=loadHanziWriter();assert.equal(scripts.length,2);globalThis.window.HanziWriter={create(){}};scripts[1].onload();await retry;
   await loadHanziWriter();assert.equal(scripts.length,2);
  }finally{if(originalWindow===undefined)delete globalThis.window;else globalThis.window=originalWindow;if(originalDocument===undefined)delete globalThis.document;else globalThis.document=originalDocument;}
+});
+
+test('new vocabulary stroke data loads on demand, coalesces requests, and retries failures',async()=>{
+ const bundle=await build({entryPoints:['lib/character-strokes.ts'],bundle:true,platform:'node',format:'esm',write:false});
+ const {loadCharacterStrokes}=await import('data:text/javascript;base64,'+Buffer.from(bundle.outputFiles[0].text).toString('base64')+'#loader');
+ const fetchBefore=globalThis.fetch;let calls=0;
+ const data=JSON.parse(await readFile('public/data/茶.json','utf8'));
+ globalThis.fetch=async url=>{calls++;assert.match(String(url),/^\/data\//);return Response.json(data);};
+ try{
+  const [first,second]=await Promise.all([loadCharacterStrokes('茶'),loadCharacterStrokes('茶')]);
+  assert.equal(first,second);assert.equal(first.length,data.strokes.length);assert.equal(calls,1);
+  assert.equal(await loadCharacterStrokes('茶'),first);assert.equal(calls,1);
+  globalThis.fetch=async()=>new Response('',{status:503});
+  await assert.rejects(loadCharacterStrokes('饭'),/unavailable/);
+  globalThis.fetch=async()=>Response.json(data);
+  assert.equal((await loadCharacterStrokes('饭')).length,data.strokes.length);
+ }finally{globalThis.fetch=fetchBefore;}
+});
+
+test('expanded vocabulary preserves original IDs, examples, local images, and safe source URLs',()=>{
+ for(const id of ['mountain','water','sun','moon','tree','forest','fire','person','big','small','mouth','field'])assert.ok(lessons.some(l=>l.id===id));
+ for(const lesson of lessons){
+  assert.equal([...lesson.char].length,1);assert.ok(lesson.example.includes(lesson.char),lesson.char);
+  assert.ok(lesson.examplePinyin&&lesson.exampleMeaning&&lesson.hint&&lesson.visual,lesson.char);
+  assert.equal(lesson.choices.length,4);assert.equal(new Set(lesson.choices).size,4);
+  assert.match(lessonArtwork(lesson),/^\/assets\/characters\/[\w-]+\.(webp|svg)$/);
+  if(lesson.storySource)assert.match(lesson.storySource,/^https:\/\/humanum\.arts\.cuhk\.edu\.hk\/Lexis\/lexi-mf\/search\.php\?word=/);
+ }
+});
+
+test('Characters gallery has a matching watercolor WebP for all 250 cards',async()=>{
+ const manifest=JSON.parse(await readFile('docs/character-art-manifest.json','utf8'));
+ assert.equal(Object.keys(manifest).length,238);
+ const briefs=JSON.parse(await readFile('docs/character-art-prompts.json','utf8')).assets;
+ for(const brief of briefs)assert.ok((manifest[brief.char]?.revision||1)>=(brief.artRevision||1),brief.char+' needs its distinctive revised painting');
+ for(const lesson of lessons){
+  const file=lesson.exploreImage||lessonArtwork(lesson);
+  assert.match(file,/\.webp$/);
+  const bytes=await readFile('public'+file);
+  assert.equal(bytes.subarray(0,4).toString(),'RIFF',lesson.char);
+  assert.equal(bytes.subarray(8,12).toString(),'WEBP',lesson.char);
+  if(lesson.exploreImage){assert.equal(manifest[lesson.char].file,file);assert.equal(manifest[lesson.char].width,1100);assert.equal(manifest[lesson.char].height,733);}
+ }
+});
+
+
+test('polyphonic pronunciation uses an unambiguous context word for the taught sense',()=>{
+ for(const [char,word] of Object.entries({发:'发型',长:'长短',只:'一只猫',地:'土地',校:'学校',苹:'苹果'})){
+  const lesson=lessons.find(l=>l.char===char);assert.ok(lesson);assert.equal(pronunciationText(lesson),word);
+ }
+ assert.equal(pronunciationText(lessons[0]),'山');
 });

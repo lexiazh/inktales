@@ -2,7 +2,7 @@
 
 import {useState} from 'react';
 import {ArrowRight,BookOpen,Bookmark,Flame,ChevronLeft,ChevronRight} from 'lucide-react';
-import {lessons,type Progress} from '@/lib/lessons';
+import {lessonArtwork,lessons,type Progress} from '@/lib/lessons';
 
 const fables=[
  {title:'Waiting by the Tree Stump',chinese:'守株待兔',story:'A farmer once saw a rabbit race across his field and crash into a tree stump. The unexpected meal seemed like a gift, so he put down his tools and waited beside the stump every day. His crops withered while he watched. No rabbit came again, and by harvest time he had lost both the easy meal and the food he could have grown.',moral:'Good fortune may arrive by chance, but a life built on waiting will pass you by.',lessonId:'tree'},
@@ -35,11 +35,11 @@ export function HomeDashboard({username,progress,bookmarks,onContinue,onExplore}
   <header className="dashboard-topbar"><div><p className="eyebrow">{date}</p><h1>{salutation}</h1></div><div className="dashboard-streak" aria-label={`${streak} day streak`}><span><Flame size={19}/></span><div><b>{streak} day streak</b><small>Keep it going</small></div></div></header>
   <section className="dashboard-hero">
    <div className="dashboard-hero-copy"><span className="dashboard-lesson-label">{learned===lessons.length?'COURSE COMPLETE':'UP NEXT · '+next.pinyin.toUpperCase()}</span><h2>{learned===lessons.length?<>Your next story<br/>is ready to revisit.</>:<>Every character<br/>holds a story.</>}</h2><p>{learned===lessons.length?'Revisit a character or explore the collection again.':`Meet ${next.char} (${next.pinyin}), meaning “${next.meaning}.” Learn it through a picture, sound, and a story behind each stroke.`}</p><button className="dashboard-primary" onClick={()=>onContinue(nextIndex)}>{learned===lessons.length?'Review a character':'Continue learning'}<ArrowRight size={18}/></button><span className="dashboard-resume">{learned===lessons.length?'Your progress is saved in this browser.':`Continue with ${next.char} · card ${nextIndex+1} of ${lessons.length}`}</span></div>
-   <div className={'dashboard-hero-art '+next.tint} aria-label={`Featured character: ${next.char}, ${next.meaning}`}><img src={'/assets/characters/'+next.id+'.webp'} alt=""/><div className="dashboard-art-wash"/><span className="dashboard-character" lang="zh-CN">{next.char}</span><div className="dashboard-character-caption"><b>{next.pinyin}</b><span>{next.meaning}</span></div><span className="dashboard-floating-stroke" lang="zh-CN">{next.char}</span></div>
+   <div className={'dashboard-hero-art '+next.tint} aria-label={`Featured character: ${next.char}, ${next.meaning}`}><img src={lessonArtwork(next)} alt=""/><div className="dashboard-art-wash"/><span className="dashboard-character" lang="zh-CN">{next.char}</span><div className="dashboard-character-caption"><b>{next.pinyin}</b><span>{next.meaning}</span></div><span className="dashboard-floating-stroke" lang="zh-CN">{next.char}</span></div>
   </section>
   <section className="dashboard-overview"><div className="dashboard-section-heading"><div><span className="dashboard-brush-mark"/>YOUR LEARNING</div><button onClick={()=>onExplore(nextIndex)}>View characters <ArrowRight size={15}/></button></div>
    <div className="dashboard-stats-grid">
-    <article className="dashboard-stat-card"><div className="dashboard-stat-icon"><BookOpen size={21}/></div><div><span>Characters learned</span><strong>{learned} <small>/ 12</small></strong><p>{12-learned} {12-learned===1?'character':'characters'} left in Beginner I</p></div></article>
+    <article className="dashboard-stat-card"><div className="dashboard-stat-icon"><BookOpen size={21}/></div><div><span>Characters learned</span><strong>{learned} <small>/ {lessons.length}</small></strong><p>{lessons.length-learned} {lessons.length-learned===1?'character':'characters'} left in Beginner I</p></div></article>
     <article className="dashboard-stat-card"><div className="dashboard-stat-icon warm"><Bookmark size={21}/></div><div><span>Saved for later</span><strong>{bookmarked}</strong><p>{bookmarked?'Ready when you are':'Save a character from its lesson'}</p></div></article>
    </div>
   </section>
