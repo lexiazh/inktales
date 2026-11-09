@@ -1,16 +1,19 @@
-import {lessonArtwork,type Lesson} from '@/lib/lessons';
+import type {Lesson} from '@/lib/lessons';
+import {foodScenes} from './living-scenes/food';
+import {natureScenes} from './living-scenes/nature';
+import {peopleScenes} from './living-scenes/people';
+import {peopleActionScenes} from './living-scenes/people-actions';
+import {placesScenes} from './living-scenes/places';
+import {timeScenes} from './living-scenes/time';
 
-// New vocabulary reveals its illustrated meaning as the learner completes each stroke.
+const scenes={...natureScenes,...peopleScenes,...peopleActionScenes,...foodScenes,...placesScenes,...timeScenes};
+
 export function LivingVocabularyScene({lesson,progress,complete}:{lesson:Lesson;progress:number;complete:boolean}){
- const amount=Math.max(0,Math.min(1,progress));
- return <g className={complete?'lh-vocabulary-scene is-complete':'lh-vocabulary-scene'}>
-  <path d="M100 350Q320 337 540 350" fill="none" stroke="#a8b28e" strokeWidth="1.5"/>
-  <g opacity={amount} transform={`translate(${320-amount*320} ${38-amount*38}) scale(${.6+amount*.4})`}>
-   <image className="lh-vocabulary-art" href={lessonArtwork(lesson)} x="110" y="-95" width="420" height="500" preserveAspectRatio="xMidYMid meet"/>
-  </g>
-  <g className="lh-vocabulary-sparks" opacity={complete?1:0} fill="none" stroke="#bd9a62" strokeWidth="1.5" strokeLinecap="round">
-   <path d="M135 110v18m-9-9h18M500 160v14m-7-7h14M460 66v14m-7-7h14"/>
-   <circle cx="170" cy="250" r="3"/><circle cx="490" cy="285" r="3"/>
-  </g>
+ const layers=scenes[lesson.char];
+ if(!layers)return null;
+ const visible=progress>0?Math.max(1,Math.floor(progress*layers.length)):0;
+ return <g className={complete?'lh-ink-scene is-complete':'lh-ink-scene'} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <path opacity=".25" strokeWidth="1.3" d="M100 347q111-9 217-1t224-3m-412 11q177-7 378-2"/>
+  {layers.slice(0,complete?layers.length:visible).map((art,index)=><g key={index} className="lh-scene-layer">{art}</g>)}
  </g>;
 }

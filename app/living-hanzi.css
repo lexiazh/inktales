@@ -2,12 +2,6 @@
 .lh-page{--lh-blue:#354f91;--lh-muted:#7c807e;--lh-paper:#faf6ec;width:100%}
 .lh-picker-heading{display:flex;align-items:center;justify-content:space-between;margin:0 0 12px;color:#777c78;font-size:11px;letter-spacing:.3px}
 .lh-picker-heading>span:last-child{font-family:var(--serif);font-size:16px;font-style:italic;color:#939282}
-.lh-character-picker{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:7px;margin-bottom:22px}
-.lh-character-picker button{min-width:0;min-height:76px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;border:1px solid #d8d2c2;border-radius:4px;background:#faf6eb88;color:#8b9084}
-.lh-character-picker button>span{font-family:var(--brush);font-size:33px;line-height:1.1}
-.lh-character-picker button small{font-family:var(--serif);font-size:14px}
-.lh-character-picker button:hover{border-color:#95a1b4;background:#eef0e2}
-.lh-character-picker button.is-selected{background:#e5e9d7;border-color:#84977b;color:#354f91;box-shadow:inset 0 -2px #8c9b78}
 .lh-notebook{position:relative;background:var(--lh-paper);border:1px solid #cbc6b6;border-radius:4px 8px 5px 4px;box-shadow:3px 4px 0 #e9e2d4,4px 5px 0 #d7d0bf;overflow:hidden}
 .lh-notebook:before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.35;background:radial-gradient(ellipse at 10% 40%,#ede6ca66,transparent 55%)}
 .lh-notebook-topline{position:relative;display:flex;align-items:center;justify-content:space-between;margin:0 25px;padding:11px 0;border-bottom:1px solid #ddd7c9;font-family:monospace;font-size:9px;letter-spacing:1px;color:#8d8f80;min-height:48px}
@@ -20,7 +14,6 @@
 .lh-world:after{content:'';position:absolute;top:25px;bottom:25px;right:0;border-right:1px dashed #c9c9b9}
 .lh-scene-stage{width:100%;display:flex;align-items:center;justify-content:center;min-height:270px}
 .lh-scene{display:block;width:100%;height:auto;max-height:375px;color:var(--lh-blue);overflow:visible}
-.lh-scene-caption{font-family:var(--serif);font-size:25px;font-style:italic;text-align:center;line-height:1.25;max-width:350px;margin:12px 0 16px;color:#7a8390}
 .lh-scene-controls{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px 20px;width:100%;font-size:10px;color:#9a9b90}
 .lh-ink-status{display:flex;align-items:center;gap:6px}
 .lh-ink-status>span{width:5px;height:5px;background:#bcbca7;border-radius:50%}
@@ -38,21 +31,47 @@
 .lh-character-note button{border:1px solid #c7cbd1;border-radius:50%;display:grid;place-items:center;min-width:38px;min-height:38px}
 .lh-character-note button:hover{background:#eceee1}
 .lh-audio-note{font-size:10px;line-height:1.5;color:#a16a49;padding-top:10px}
-@media(min-width:1500px){.lh-world{padding:35px}.lh-practice{padding:32px 42px 25px}.lh-scene-stage{min-height:340px}.lh-scene-caption{font-size:28px}}
-@media(max-width:1100px){.view-living.main-content{padding:22px}.lh-character-picker{gap:5px;margin-bottom:18px}.lh-character-picker button{min-height:65px;gap:1px}.lh-character-picker button>span{font-size:30px}.lh-character-picker button small{font-size:13px}.lh-spread{grid-template-columns:minmax(0,1.2fr) minmax(270px,1fr)}.lh-practice{padding:22px 20px 18px}.lh-world{padding:25px 15px}.lh-scene-caption{font-size:22px}.lh-practice-title h2{font-size:31px}}
-@media(max-width:700px){.view-living.main-content{padding:18px 13px 25px}.lh-picker-heading{font-size:10px;margin-bottom:9px}.lh-picker-heading>span:last-child{font-size:14px}.lh-character-picker{grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;margin-bottom:15px}.lh-character-picker button{min-height:57px}.lh-character-picker button>span{font-size:26px}.lh-character-picker button small{font-size:11px}.lh-notebook-topline{margin:0 16px;padding:7px 0;min-height:43px;font-size:8px;letter-spacing:.6px}.lh-spread{display:flex;flex-direction:column}.lh-world{padding:14px 13px 13px}.lh-world:after{left:18px;right:18px;top:auto;bottom:0;border-right:0;border-bottom:1px dashed #c9c9b9}.lh-scene-stage{min-height:0}.lh-scene{max-height:210px}.lh-scene-caption{font-size:21px;margin:0 0 5px}.lh-scene-controls{font-size:9px;gap:5px 16px}.lh-practice{padding:22px 18px 20px}.lh-practice-title h2{font-size:32px}.lh-practice-title p{font-size:11px}.lh-practice-title p br{display:none}.lh-character-note{margin-top:11px}.lh-character-note strong{font-size:38px}.lh-character-note b{font-size:22px}}
+@media(min-width:1500px){.lh-world{padding:35px}.lh-practice{padding:32px 42px 25px}.lh-scene-stage{min-height:340px}}
+@media(max-width:1100px){.view-living.main-content{padding:22px}.lh-spread{grid-template-columns:minmax(0,1.2fr) minmax(270px,1fr)}.lh-practice{padding:22px 20px 18px}.lh-world{padding:25px 15px}.lh-practice-title h2{font-size:31px}}
+@media(max-width:700px){.view-living.main-content{padding:18px 13px 25px}.lh-picker-heading{font-size:10px;margin-bottom:9px}.lh-picker-heading>span:last-child{font-size:14px}.lh-notebook-topline{margin:0 16px;padding:7px 0;min-height:43px;font-size:8px;letter-spacing:.6px}.lh-spread{display:flex;flex-direction:column}.lh-world{padding:14px 13px 13px}.lh-world:after{left:18px;right:18px;top:auto;bottom:0;border-right:0;border-bottom:1px dashed #c9c9b9}.lh-scene-stage{min-height:0}.lh-scene{max-height:210px}.lh-scene-controls{font-size:9px;gap:5px 16px}.lh-practice{padding:22px 18px 20px}.lh-practice-title h2{font-size:32px}.lh-practice-title p{font-size:11px}.lh-practice-title p br{display:none}.lh-character-note{margin-top:11px}.lh-character-note strong{font-size:38px}.lh-character-note b{font-size:22px}}
 @media(prefers-reduced-motion:reduce){.lh-page *{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
 
-/* Keep the expanded course picker compact while making every character reachable. */
 .lh-library-filters{display:flex;gap:14px;margin-bottom:12px;align-items:end}
 .lh-library-filters label{display:flex;flex:1;min-width:0;flex-direction:column;gap:6px;font-size:11px;color:#787e74}
 .lh-library-filters select,.lh-library-filters input{width:100%;min-width:0;border:1px solid #d8d2c2;border-radius:5px;padding:10px 12px;background:#faf6eb;color:#354f91;font:inherit;font-size:13px}
-.lh-character-picker{max-height:180px;overflow-y:auto;padding:2px 4px 6px 2px;scrollbar-width:thin;grid-template-columns:repeat(auto-fill,minmax(62px,1fr))}
-.lh-character-picker button{min-height:70px}
-.lh-vocabulary-art{mix-blend-mode:multiply}
-.lh-vocabulary-scene.is-complete .lh-vocabulary-art{animation:lh-vocabulary-float 4s ease-in-out infinite;transform-origin:center}
-.lh-vocabulary-scene.is-complete .lh-vocabulary-sparks{animation:lh-vocabulary-glow 3s ease-in-out infinite}
-@keyframes lh-vocabulary-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes lh-vocabulary-glow{0%,100%{opacity:.45}50%{opacity:1}}
-@media(max-width:600px){.lh-library-filters{flex-direction:column;align-items:stretch;gap:9px}.lh-character-picker{max-height:154px;grid-template-columns:repeat(auto-fill,minmax(50px,1fr))}.lh-character-picker button{min-height:62px}.lh-library-filters select,.lh-library-filters input{font-size:16px}}
-@media(prefers-reduced-motion:reduce){.lh-vocabulary-scene.is-complete .lh-vocabulary-art,.lh-vocabulary-scene.is-complete .lh-vocabulary-sparks{animation:none}}
+@media(max-width:600px){.lh-library-filters{flex-direction:column;align-items:stretch;gap:9px}.lh-library-filters select,.lh-library-filters input{font-size:16px}}
+
+.lh-scene-layer{animation:lh-ink-reveal .58s ease-out both}
+.lh-scene-layer:nth-of-type(2){animation-delay:.1s}
+.lh-scene-layer:nth-of-type(3){animation-delay:.2s}
+.lh-scene-layer:nth-of-type(4){animation-delay:.3s}
+.lh-ink-scene.is-complete [class^="lh-motion-"]{transform-box:fill-box;transform-origin:center}
+.lh-ink-scene.is-complete .lh-motion-drift{animation:lh-ink-drift 5s ease-in-out infinite alternate}
+.lh-ink-scene.is-complete .lh-motion-flow{animation:lh-ink-flow 2.6s ease-in-out infinite alternate}
+.lh-ink-scene.is-complete .lh-motion-fall{animation:lh-ink-fall 2.2s ease-in infinite}
+.lh-ink-scene.is-complete .lh-motion-rise{animation:lh-ink-rise 4.5s ease-in-out infinite alternate}
+.lh-ink-scene.is-complete .lh-motion-sway{animation:lh-ink-sway 3.8s ease-in-out infinite alternate;transform-origin:center bottom}
+.lh-ink-scene.is-complete .lh-motion-pulse{animation:lh-ink-pulse 2.6s ease-in-out infinite alternate}
+.lh-ink-scene.is-complete .lh-motion-spin{animation:lh-ink-spin 8s linear infinite}
+.lh-ink-scene.is-complete .lh-motion-nod{animation:lh-ink-nod 2.4s ease-in-out infinite alternate}
+.lh-ink-scene.is-complete .lh-motion-hop{animation:lh-ink-hop 2.3s ease-in-out infinite}
+.lh-ink-scene.is-complete .lh-motion-stretch{animation:lh-ink-stretch 2.8s ease-in-out infinite alternate}
+.lh-ink-scene.is-complete .lh-motion-blink{animation:lh-ink-blink 3.6s ease-in-out infinite}
+.lh-ink-scene.is-complete .lh-motion-slide{animation:lh-ink-slide 2.8s ease-in-out infinite alternate}
+.lh-ink-scene.is-complete .lh-motion-tilt{animation:lh-ink-tilt 3.5s ease-in-out infinite alternate}
+.lh-ink-scene.is-complete .lh-motion-steam{animation:lh-ink-steam 2.8s ease-out infinite}
+@keyframes lh-ink-reveal{from{opacity:0}to{opacity:1}}
+@keyframes lh-ink-drift{from{transform:translate(-12px,4px)}to{transform:translate(14px,-4px)}}
+@keyframes lh-ink-flow{from{transform:translateX(-9px);opacity:.62}to{transform:translateX(11px);opacity:1}}
+@keyframes lh-ink-fall{0%{transform:translateY(-16px);opacity:.15}30%,75%{opacity:1}100%{transform:translateY(24px);opacity:.15}}
+@keyframes lh-ink-rise{from{transform:translateY(9px)}to{transform:translateY(-14px)}}
+@keyframes lh-ink-sway{from{transform:rotate(-4deg)}to{transform:rotate(4deg)}}
+@keyframes lh-ink-pulse{from{transform:scale(.94);opacity:.6}to{transform:scale(1.05);opacity:1}}
+@keyframes lh-ink-spin{to{transform:rotate(360deg)}}
+@keyframes lh-ink-nod{from{transform:rotate(-5deg)}to{transform:rotate(5deg)}}
+@keyframes lh-ink-hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes lh-ink-stretch{from{transform:scaleX(.87)}to{transform:scaleX(1.05)}}
+@keyframes lh-ink-blink{0%,42%,52%,100%{transform:scaleY(1)}47%{transform:scaleY(.13)}}
+@keyframes lh-ink-slide{from{transform:translateX(-16px)}to{transform:translateX(16px)}}
+@keyframes lh-ink-tilt{from{transform:rotate(-9deg)}to{transform:rotate(9deg)}}
+@keyframes lh-ink-steam{0%{transform:translateY(9px);opacity:.15}30%{opacity:.85}100%{transform:translate(6px,-19px);opacity:.15}}

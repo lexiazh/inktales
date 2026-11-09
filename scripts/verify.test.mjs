@@ -73,6 +73,10 @@ test('every course character has one distinct living scene that changes with wri
  await build({stdin:{contents:"export {LivingNatureScene} from './components/living-nature-scene';export {LivingLifeScene} from './components/living-life-scene';export {LivingVocabularyScene} from './components/living-vocabulary-scene';",resolveDir:resolve('.')},bundle:true,platform:'node',format:'esm',outfile:out,external:['react'],jsx:'automatic'});
  const {LivingNatureScene,LivingLifeScene,LivingVocabularyScene}=await import(pathToFileURL(out).href);
  const {renderToStaticMarkup}=await import('react-dom/server');const {createElement}=await import('react');
+ const css=await readFile('app/living-hanzi.css','utf8');
+ const motions=new Set([...css.matchAll(/\.lh-ink-scene\.is-complete \.(lh-motion-[a-z-]+)\{/g)].map(match=>match[1]));
+ const expandedArt=new Set();
+ const layerCount=html=>[...html.matchAll(/class="lh-scene-layer"/g)].length;
  for(const lesson of lessons){
   const props={id:lesson.id,lesson,progress:1,complete:true};
   const custom=[LivingNatureScene(props),LivingLifeScene(props)].filter(Boolean);
@@ -82,7 +86,26 @@ test('every course character has one distinct living scene that changes with wri
   const empty=renderToStaticMarkup(createElement('svg',null,createElement(Scene,{...props,progress:0,complete:false})));
   assert.notEqual(full,empty,lesson.char+' must respond to writing progress');
   assert.doesNotMatch(full,/NaN|Infinity/,lesson.char);
+  if(!custom.length){
+   assert.match(full,/<path\b/,lesson.char);
+   assert.doesNotMatch(full,/<image\b/,lesson.char);
+   assert.match(full,/class="lh-ink-scene is-complete"/,lesson.char);
+   const layers=layerCount(full);
+   assert.ok(layers>=2&&layers<=4,lesson.char);
+   assert.equal(layerCount(empty),0,lesson.char);
+   if(lesson.strokes>1){
+    const partial=renderToStaticMarkup(createElement('svg',null,createElement(Scene,{...props,progress:1/lesson.strokes,complete:false})));
+    assert.ok(layerCount(partial)>0&&layerCount(partial)<layers,lesson.char);
+    assert.doesNotMatch(partial,/is-complete/,lesson.char);
+   }
+   const active=[...full.matchAll(/class="(lh-motion-[a-z-]+)"/g)].map(match=>match[1]);
+   assert.ok(active.length&&active.every(name=>motions.has(name)),lesson.char);
+   const art=full.replace(/ class="lh-motion-[a-z-]+"/g,'');
+   assert.ok(!expandedArt.has(art),lesson.char+' must have its own scene');
+   expandedArt.add(art);
+  }
  }
+ assert.equal(expandedArt.size,238);
 });
 test('completion replaces the removed rating controls without mutating earlier progress',()=>{
  const earlier={water:{learned:true,reviewedAt:100,due:200,rating:'Good'}};
@@ -90,10 +113,10 @@ test('completion replaces the removed rating controls without mutating earlier p
  assert.equal(earlier.mountain,undefined);assert.deepEqual(result.water,earlier.water);
  assert.deepEqual(result.mountain,{learned:true,reviewedAt:1000,due:86401000,rating:'Completed'});
 });
-test('all twelve evolution records use sourced, licensed glyphs',async()=>{
+test('available evolution records use sourced, licensed glyphs',async()=>{
  const sources=JSON.parse(await readFile('public/evolution/sources.json','utf8'));
- assert.equal(Object.keys(sources).length,12);
- for(const l of lessons.filter(l=>sources[l.char])){const forms=sources[l.char];assert.equal(forms.length,3);assert.equal(new Set(forms.map(f=>f.stage)).size,3);assert.ok(forms.filter(f=>f.available).length>0,'No historical forms: '+l.char);
+ assert.equal(Object.keys(sources).length,lessons.length);
+ for(const l of lessons){const forms=sources[l.char];assert.equal(forms.length,3);assert.equal(new Set(forms.map(f=>f.stage)).size,3);
   for(const f of forms.filter(f=>f.available)){assert.match(f.source,/^https:\/\/commons\.wikimedia\.org\//);assert.match(f.license,/Public domain|CC0/);const bytes=await readFile('public'+f.file);assert.ok(bytes.length>100);if(f.file.endsWith('.svg'))assert.doesNotMatch(bytes.toString(),/<script|<foreignObject|(?:href|xlink:href)\s*=\s*["']https?:/i);}
  }
 });

@@ -63,7 +63,7 @@ export function CharacterIllustration({lesson,speaking,onListen}:{lesson:Lesson;
 
  return <>
   <div className="character-visual">
-   <figure className="character-art"><img src={lessonArtwork(lesson)} alt={lesson.imageAlt} fetchPriority="high"/></figure>
+   <figure className="character-art"><img src={lesson.exploreImage||lessonArtwork(lesson)} alt={lesson.imageAlt} fetchPriority="high"/></figure>
    <div className={'character-hanzi animated-hanzi'+(playing?' is-playing':'')+(tracing?' is-tracing':'')} lang="zh-CN" aria-label={lesson.char}>
     <svg className="regular-hanzi" viewBox="0 0 1024 1024" aria-label={tracing?`Draw over ${lesson.char}`:undefined} aria-hidden={!tracing} onPointerDown={startTrace} onPointerMove={moveTrace} onPointerUp={endTrace} onPointerCancel={endTrace}>
      <defs>{strokes.map(({median,length,radius},index)=><mask key={index} id={`${id}-${index}`} maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="-500" y="-600" width="2100" height="2100"><polyline ref={element=>{lines.current[index]=element;}} points={median.map(point=>point.join(',')).join(' ')} fill="none" stroke="#fff" strokeWidth={radius*2} strokeLinecap="round" strokeLinejoin="round" strokeDasharray={length+radius*2} strokeDashoffset={length+radius*3}/></mask>)}</defs>

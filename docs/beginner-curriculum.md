@@ -12,7 +12,7 @@ CUHK Multi-function Chinese Character Database entries were consulted where retr
 
 The Characters gallery uses an individually generated watercolor painting per new card. The prompt set is in `character-art-prompts.json`; installed image metadata is recorded in `character-art-manifest.json`. New raster assets are 1100 × 733 WebP files under `public/assets/characters/watercolor`. The original twelve paintings remain unchanged. Gallery images have no baked-in Chinese or pinyin: those are rendered by the existing card layout.
 
-Writing practice retains its lightweight local vector scenes, with the original twelve bespoke Living Hanzi animations preserved. New vocabulary reveals its matching illustrated cue as writing progresses.
+Living Hanzi uses local vector scenes for all 250 characters. Accepted strokes reveal layers of the scene. Finishing the character starts a motion tied to its meaning, such as rainfall for 雨 or rising steam for 煮.
 
 ## Categories
 

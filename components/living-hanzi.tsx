@@ -8,26 +8,27 @@ import {LivingNatureScene} from './living-nature-scene';
 import {LivingLifeScene} from './living-life-scene';
 import {LivingVocabularyScene} from './living-vocabulary-scene';
 
-const sceneNotes:Record<string,{title:string;caption:string}>={
- mountain:{title:'Sketch a mountain.',caption:'A mountain reaches for the clouds.'},
- water:{title:'Let the water flow.',caption:'A little stream, always on its way.'},
- sun:{title:'Bring out the sun.',caption:'A new day rises from your ink.'},
- moon:{title:'Light up the night.',caption:'The moon keeps the stars company.'},
- tree:{title:'Grow a little tree.',caption:'A little tree stretches in the breeze.'},
- forest:{title:'Wake up the woods.',caption:'A whole little world among the trees.'},
- fire:{title:'Light a little fire.',caption:'A little warmth, dancing on the page.'},
- person:{title:'Meet a little traveler.',caption:'A little person, a new adventure.'},
- big:{title:'Make something big.',caption:'A little balloon becomes something big.'},
- small:{title:'Notice the little things.',caption:'A tiny world, waiting to be noticed.'},
- mouth:{title:'Say a little hello.',caption:'One little mouth, a world of words.'},
- field:{title:'Grow a little garden.',caption:'A field comes to life, row by row.'},
+const sceneNotes:Record<string,string>={
+ mountain:'Sketch a mountain.',
+ water:'Let the water flow.',
+ sun:'Bring out the sun.',
+ moon:'Light up the night.',
+ tree:'Grow a little tree.',
+ forest:'Wake up the woods.',
+ fire:'Light a little fire.',
+ person:'Meet a little traveler.',
+ big:'Make something big.',
+ small:'Notice the little things.',
+ mouth:'Say a little hello.',
+ field:'Grow a little garden.',
 };
 
 export function LivingHanzi(){
  const [index,setIndex]=useState(0);
  const [category,setCategory]=useState('All characters');
  const [query,setQuery]=useState('');
- const matching=lessons.map((item,index)=>({item,index})).filter(({item})=>(category==='All characters'||item.category===category)&&`${item.char} ${item.pinyin} ${item.plain} ${item.meaning}`.toLowerCase().includes(query.trim().toLowerCase()));
+ const matches=(item:typeof lessons[number],text:string)=>(category==='All characters'||item.category===category)&&`${item.char} ${item.pinyin} ${item.plain} ${item.meaning}`.toLowerCase().includes(text.trim().toLowerCase());
+ const matching=lessons.map((item,index)=>({item,index})).filter(({item})=>matches(item,query));
  const [strokes,setStrokes]=useState(0);
  const [complete,setComplete]=useState(false);
  const [run,setRun]=useState(0);
@@ -35,7 +36,7 @@ export function LivingHanzi(){
  const [audioNote,setAudioNote]=useState('');
  const speech=useRef<SpeechSynthesisUtterance|null>(null);
  const lesson=lessons[index];
- const note=sceneNotes[lesson.id]||{title:`Bring ${lesson.char} to life.`,caption:lesson.visual};
+ const title=sceneNotes[lesson.id]||`Bring ${lesson.char} to life.`;
  const progress=strokes/lesson.strokes;
  const choose=(next:number)=>{setIndex((next+lessons.length)%lessons.length);setStrokes(0);setComplete(false);setRun(n=>n+1);setReplay(0);setAudioNote('');};
  const turn=(direction:number)=>{if(!matching.length)return;const current=matching.findIndex(entry=>entry.index===index);const next=current<0?(direction>0?0:matching.length-1):(current+direction+matching.length)%matching.length;choose(matching[next].index);};
@@ -50,10 +51,9 @@ export function LivingHanzi(){
  return <div className="lh-page">
   <h1 className="sr-only">Living Hanzi</h1>
   <div className="lh-picker-heading"><span>Choose a character</span><span>{matching.length} of {lessons.length} characters</span></div>
-  <div className="lh-library-filters"><label>Category<select aria-label="Living Hanzi category" value={category} onChange={event=>{const next=event.target.value;setCategory(next);setQuery('');choose(lessons.findIndex(item=>next==='All characters'||item.category===next));}}>{['All characters',...lessonCategories].map(name=><option key={name}>{name}</option>)}</select></label><label>Find a character<input aria-label="Search Living Hanzi characters" placeholder="Character, pinyin, or meaning" value={query} onChange={event=>setQuery(event.target.value)}/></label></div>
-  <nav className="lh-character-picker" aria-label="Choose a character to animate">{matching.map(({item,index:i})=><button key={item.id} aria-label={`${item.char} · ${item.pinyin} · ${item.meaning}`} aria-pressed={index===i} className={index===i?'is-selected':''} onClick={()=>choose(i)}><span lang="zh-CN">{item.char}</span><small>{item.pinyin}</small></button>)}</nav>
+  <div className="lh-library-filters"><label>Category<select aria-label="Living Hanzi category" value={category} onChange={event=>{const next=event.target.value;setCategory(next);setQuery('');choose(lessons.findIndex(item=>next==='All characters'||item.category===next));}}>{['All characters',...lessonCategories].map(name=><option key={name}>{name}</option>)}</select></label><label>Find a character<input aria-label="Search Living Hanzi characters" placeholder="Character, pinyin, or meaning" value={query} onChange={event=>{const next=event.target.value;setQuery(next);if(!matches(lesson,next)){const first=lessons.findIndex(item=>matches(item,next));if(first>=0)choose(first);}}}/></label></div>
   {!matching.length&&<p role="status">No matching characters. Try another search.</p>}
-  <section className="lh-notebook" aria-label={`Write ${lesson.char} to animate ${lesson.meaning}`}>
+  {!!matching.length&&<section className="lh-notebook" aria-label={`Write ${lesson.char} to animate ${lesson.meaning}`}>
    <div className="lh-notebook-topline"><span>{lesson.category.toUpperCase()} <i>/</i> {String(index+1).padStart(2,'0')} OF {lessons.length}</span><div className="lh-page-turns"><button aria-label="Previous character" disabled={!matching.length} onClick={()=>turn(-1)}><ArrowLeft size={15}/></button><button aria-label="Next character" disabled={!matching.length} onClick={()=>turn(1)}><ArrowRight size={15}/></button></div></div>
    <div className="lh-spread">
     <div className={'lh-world '+(complete?'is-alive':'')}>
@@ -65,16 +65,15 @@ export function LivingHanzi(){
        {!sceneNotes[lesson.id]&&<LivingVocabularyScene lesson={lesson} progress={progress} complete={complete}/>}
       </svg>
      </div>
-     <p className="lh-scene-caption">{note.caption}</p>
      <div className="lh-scene-controls"><span className={complete?'lh-ink-status is-complete':'lh-ink-status'} role="status">{complete?<><Check size={13}/>Your character is alive</>:<><span/>Your ink brings it to life</>}</span><button aria-label={`Replay ${lesson.meaning} animation`} disabled={!complete} onClick={()=>setReplay(n=>n+1)}><RotateCcw size={14}/>Replay</button></div>
     </div>
     <div className="lh-practice">
-     <div className="lh-practice-title"><h2>{note.title}</h2><p>Write <span lang="zh-CN">{lesson.char}</span>, one stroke at a time.<br/>Watch your ink turn into a little world.</p></div>
+     <div className="lh-practice-title"><h2>{title}</h2><p>Write <span lang="zh-CN">{lesson.char}</span>, one stroke at a time.<br/>Watch your ink turn into a little world.</p></div>
      <LivingCharacterTrace key={`${lesson.id}-${run}`} lesson={lesson} onProgress={n=>{setStrokes(n);if(n<lesson.strokes)setComplete(false);}} onComplete={()=>{setStrokes(lesson.strokes);setComplete(true);}}/>
      <div className="lh-character-note"><div><strong lang="zh-CN">{lesson.char}</strong><span><b>{lesson.pinyin}</b><small>{lesson.meaning}</small></span></div><button aria-label={`Hear ${lesson.pinyin}${pronunciationText(lesson)!==lesson.char?' in '+pronunciationText(lesson):''}`} onClick={speak}><Volume2 size={18}/></button></div>
      {audioNote&&<p className="lh-audio-note" role="status">{audioNote}</p>}
     </div>
    </div>
-  </section>
+  </section>}
  </div>;
 }

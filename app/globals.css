@@ -562,11 +562,12 @@ body{font-size:16px}
 .lesson-panel .story-panel{flex:1 0 auto;min-height:auto}
 .lesson-panel .story-content{min-height:auto;flex-shrink:0;gap:1rem;padding-top:1rem;padding-bottom:1rem}
 .lesson-panel .story-content>*{flex-shrink:0}
-.lesson-panel .story-text{font-size:1.5rem;line-height:1.4}
+.lesson-panel .story-text{font-size:1.5rem;line-height:1.4;white-space:pre-line}
 .lesson-panel .memory-note{min-height:0;padding:.65rem .8rem}
 .lesson-panel .memory-note p{font-size:1.15rem;line-height:1.3}
 .lesson-panel .story-source{font-size:.75rem}
 .lesson-panel .evolution-strip{flex:0 0 auto;margin-top:1rem}
+.evolution-availability{display:block;font:11px/1.2 var(--sans);color:#8a8e7e}
 @media(max-width:760px){.lesson-panel .story-text{font-size:1.2rem}.lesson-panel .story-content{gap:.7rem;padding-top:.7rem;padding-bottom:.7rem}}
 .writing-load-note{font-size:12px;text-align:center;color:var(--sage);padding:6px 12px;margin:0}
 .character-results-count{font-size:12px;color:var(--sage);margin:0 0 15px}

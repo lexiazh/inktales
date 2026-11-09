@@ -10,6 +10,7 @@ import {JourneyDashboard} from './journey-dashboard';
 import {CharacterIllustration} from './character-illustration';
 import {HomeDashboard} from './home-dashboard';
 import {LivingHanzi} from './living-hanzi';
+import {MemoryCueIcon} from './memory-cue-icon';
 
 type View='learn'|'explore'|'journey'|'assistant'|'home'|'living';
 type Message={role:'user'|'assistant';text:string;offline?:boolean};
@@ -133,11 +134,18 @@ function MemorySketch({id,char}:{id:string;char:string}){
   small:<><circle cx="39" cy="38" r="8"/><circle cx="14" cy="43" r="3"/><circle cx="64" cy="43" r="3"/><path d="M8 52h62"/></>,
   mouth:<><path d="M15 23q24-25 48 0-24 39-48 0Z"/><path d="M18 24h42M39 4V1m-20 8-4-5m44 5 4-5"/></>,
   field:<><path d="m12 16 39-9 17 31-40 11Z"/><path d="m31 12 18 32M20 31l40-10m-41-1 39-10M24 39l39-10"/></>,
+  'hanzi-5730':<><path d="M3 33q18-8 36-3t36-2M3 39q18-8 36-3t36-2M3 46q18-8 36-3t36-2"/><path d="M17 25v-9m0 5-5-5m5 4 5-6m37 13V13m0 8-5-5m5 3 5-6"/></>,
+  'hanzi-571f':<><path d="M3 46q11-4 21-14l9-9 9 2 8-6 10 13 15 14M3 46h72"/><path d="M39 23v-13m0 7-6-5m6 5 6-5"/></>,
+  'hanzi-84b8':<><path d="M8 39q22-19 43 0-21 17-43 0Zm43 0 16-9v18Z"/><circle cx="23" cy="37" r="1"/><path d="M26 27q-5-5 1-10t0-10m13 20q-5-5 1-10t0-10m13 20q-5-5 1-10t0-10"/></>,
  };
- return <svg className="memory-sketch" viewBox="0 0 78 56" width="49" height="39" fill="none" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" strokeLinejoin="round" role="img" aria-label={'Visual memory cue for '+char}>{shapes[id]||<text x="39" y="42" textAnchor="middle" fill="currentColor" stroke="none" fontSize="40" fontFamily="var(--brush)">{char}</text>}</svg>;
+ return shapes[id]?<svg className="memory-sketch" viewBox="0 0 78 56" width="49" height="39" fill="none" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" strokeLinejoin="round" role="img" aria-label={'Visual memory cue for '+char}>{shapes[id]}</svg>:<MemoryCueIcon char={char}/>;
 }
 
 function Evolution({lesson}:{lesson:Lesson}){
- const stages=(evolutionData as Record<string,{stage:string;label:string;available:boolean;file?:string;source?:string;description?:string}[]>)[lesson.char]||[];
- return <section className="evolution-strip" aria-label={'Character evolution for '+lesson.char}><div className="evolution-heading"><span className="eyebrow">THROUGH THE AGES</span><h3>Character evolution</h3></div><div className="evolution-stages">{stages.map(s=><a className={'evolution-stage '+(!s.available?'unavailable':'')} key={s.stage} href={s.source||'/credits#character-evolution'} target="_blank" rel="noreferrer" title={s.available?s.label+' form — view source on Wikimedia Commons':'No sourced form available in this collection'}><span className="evolution-glyph">{s.available&&s.file?<img src={s.file} alt={lesson.char+' in '+s.label}/>:<span aria-label="Not available">—</span>}</span><span className="evolution-label">{s.label}</span></a>)}<a className="evolution-stage modern" href="/credits#character-evolution" target="_blank" rel="noreferrer" title="Modern standard character"><span className="evolution-glyph" lang="zh-CN">{lesson.char}</span><span className="evolution-label">Today</span></a></div></section>;
+ const stages=(evolutionData as Record<string,{stage:string;label:string;available:boolean;file?:string;source?:string;description?:string}[]>)[lesson.char]||[
+  {stage:'oracle',label:'Oracle bone',available:false},
+  {stage:'bronze',label:'Bronze script',available:false},
+  {stage:'seal',label:'Small seal',available:false},
+ ];
+ return <section className="evolution-strip" aria-label={'Character evolution for '+lesson.char}><div className="evolution-heading"><span className="eyebrow">THROUGH THE AGES</span><h3>Character evolution</h3>{stages.some(s=>!s.available)&&<span className="evolution-availability">— no sourced image yet</span>}</div><div className="evolution-stages">{stages.map(s=><a className={'evolution-stage '+(!s.available?'unavailable':'')} key={s.stage} href={s.source||'/credits#character-evolution'} target="_blank" rel="noreferrer" title={s.available?s.label+' form — view source on Wikimedia Commons':'No sourced form available in this collection'}><span className="evolution-glyph">{s.available&&s.file?<img src={s.file} alt={lesson.char+' in '+s.label}/>:<span aria-label="Not available">—</span>}</span><span className="evolution-label">{s.label}</span></a>)}<a className="evolution-stage modern" href="/credits#character-evolution" target="_blank" rel="noreferrer" title="Modern standard character"><span className="evolution-glyph" lang="zh-CN">{lesson.char}</span><span className="evolution-label">Today</span></a></div></section>;
 }
