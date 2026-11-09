@@ -1,39 +1,44 @@
 # InkTales
 
-English-first Chinese-character learning, inspired by traditional watercolor landscapes and rice paper. The app opens on the full-page framed flashcard and includes a home page, 12-character explorer, learning path, local progress, bookmarks, sourced historical forms with hover highlights, animated stroke playback, contextual and standalone learning companions.
+**Learn Chinese characters through pictures, stories, and writing.**
 
-## Run
+InkTales is an English-first learning website for people meeting Chinese characters for the first time. Each lesson brings together a watercolor illustration, pronunciation, a short memory story, stroke order, and writing practice. The interface takes its visual cues from ink painting and paper.
 
-Requires Node >=22.13.
+[Try InkTales](https://inktales-lexi.sylviahardy98.chatgpt.site/)
+
+## What you can explore
+
+- **250 beginner characters** across Nature, People & life, Food & Drink, Places & Transport, and Numbers & Time. Each category has 50 characters.
+- **Flashcards** with pinyin, English meanings, example words, audio through your device's Mandarin voice, stroke playback, and tracing.
+- **Living Hanzi** scenes that appear as you write each stroke. Completing a character starts an animation connected to its meaning.
+- **Characters** gallery with individual watercolor illustrations, search, category filters, and saved characters.
+- **13 Fables & Tales** on the Home page, each with an English retelling, a Chinese title, a moral, and a link to a related character.
+- **My journey** for learned characters and recent practice. Progress and bookmarks are saved in the current browser.
+- **Momo 墨墨**, a course companion that answers from lesson notes. The live website currently uses its clearly labeled offline guide mode. The server also supports an optional Gemini integration.
+
+You can explore as a guest or use Supabase email and password sign-in. Signing in does not sync learning progress between devices.
+
+## Run locally
+
+You need Node.js 22.13 or newer, npm, and a Supabase project with email/password authentication enabled.
 
 ```sh
 npm ci
+cp .env.example .env.local
+```
+
+Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` in `.env.local` to your project's URL and publishable key. These values configure the sign-in form. Keep `.env.local` out of Git.
+
+```sh
 npm run dev
 ```
 
-Local preview: http://localhost:5173
+Open [http://localhost:5173](http://localhost:5173). For a production build, run `npm run build`. The repository includes the character artwork, stroke data, fonts, and historical-form images used by the lessons.
 
-```sh
-npx tsc --noEmit
-npm run build
-```
+## Content and attribution
 
-## Course and imagery
+The memory stories and illustrations help learners remember modern meanings. They are teaching aids, not verified explanations of character origins. Where available, the character-evolution strip shows sourced historical forms and links to their records. Details about the artwork, fonts, writing data, historical images, and licenses are on the [credits page](https://inktales-lexi.sylviahardy98.chatgpt.site/credits).
 
-`lib/lessons.ts` contains 12 original lessons. All stories are explicitly labeled mnemonics. No unreviewed historical forms or etymological claims are presented as fact. Stroke data and Hanzi Writer are bundled under `public/data` and `public/vendor`, including licenses. Twelve focused watercolor illustrations live in `public/assets/characters`. The welcome page uses an owner-supplied landscape image and previews sign-in and sign-up; accounts are not connected, and visitors can enter lessons without one. The sourced historical forms and public-domain/CC0 metadata are bundled under `public/evolution` and `lib/evolution-data.json`. The supplied UI reference informed the design and is not distributed.
+The introductory course notes have not received independent language-teacher review.
 
-## Optional real AI
-
-`app/api/assistant/route.ts` is a server-side Gemini generateContent integration. It defaults to clearly labeled offline lesson notes, which require no credentials. Both the standalone companion and lesson drawer share this endpoint.
-
-Configure server runtime values using the Sites environment tools: `GEMINI_API_KEY`, `GEMINI_MODEL`, `AI_ENABLED=true`, and optionally `AI_DAILY_LIMIT`. For local development, use an untracked `.dev.vars` file as supported by Cloudflare. Do not put keys in client code. Review current Gemini pricing, eligibility, regional restrictions, retention/data policies, and set a provider-level spending cap before activation. The request counter is in worker memory and is best effort, not a durable global budget limit. No live provider test was performed without a key.
-
-Questions are 1–600 characters, history is capped to six messages, responses are bounded, and requests time out after 18 seconds. Failures display a clear notice and use the authored lesson fallback. Prompts/responses are not logged by this application. `/credits` documents privacy and licensing.
-
-## Storage
-
-Browser local storage only: `inktales-progress-v1`, `inktales-bookmarks`, and `inktales-settings`. Reset learning progress is available in settings; clear site data to remove all local information. Answer the practice question correctly and choose Complete & continue to save completion. Earlier review records remain intact; no review-rating controls are shown. Flashcards use a fixed viewport layout with a left navigation rail and a historical-form strip.
-
-## Before a public educational launch
-
-Independent language-teacher review, broader browser/device usability testing, and a live-provider evaluation remain necessary. The initial Sites deployment is owner-private. No public-audience change is made.
+The source is publicly viewable. This repository does not currently include a license for reuse of the project code, text, or original artwork. Third-party materials retain their own licenses as described in the credits.
