@@ -4,7 +4,7 @@
 
 InkTales is an English-first learning website for people meeting Chinese characters for the first time. Each lesson brings together a watercolor illustration, pronunciation, a short memory story, stroke order, and writing practice. The interface takes its visual cues from ink painting and paper.
 
-[Try InkTales](https://inktales-lexi.sylviahardy98.chatgpt.site/)
+[Try InkTales](https://inktales-hanzi.vercel.app/)
 
 ## What you can explore
 
@@ -37,7 +37,7 @@ Open [http://localhost:5173](http://localhost:5173). For a production build, run
 
 ## Content and attribution
 
-The memory stories and illustrations help learners remember modern meanings. They are teaching aids, not verified explanations of character origins. Where available, the character-evolution strip shows sourced historical forms and links to their records. Details about the artwork, fonts, writing data, historical images, and licenses are on the [credits page](https://inktales-lexi.sylviahardy98.chatgpt.site/credits).
+The memory stories and illustrations help learners remember modern meanings. They are teaching aids, not verified explanations of character origins. Where available, the character-evolution strip shows sourced historical forms and links to their records. Details about the artwork, fonts, writing data, historical images, and licenses are on the [credits page](https://inktales-hanzi.vercel.app/credits).
 
 The introductory course notes have not received independent language-teacher review.
 
